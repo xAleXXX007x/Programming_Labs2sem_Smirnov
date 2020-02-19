@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AircraftFactory.Properties
+namespace AircraftFactoryView.Properties
 {
 
 

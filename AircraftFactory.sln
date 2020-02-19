@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftFactory", "AircraftFactory\AircraftFactory.csproj", "{E455A67C-9BAF-4D99-A7DA-0F15BB4546B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftFactoryBusinessLogic", "AircraftFactoryBusinessLogic\AircraftFactoryBusinessLogic.csproj", "{47E25470-E53F-4395-8A22-42EA660A8386}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftFactoryListImplement", "AircraftFactoryListImplement\AircraftFactoryListImplement.csproj", "{2BB8C3C8-B61B-4F01-8710-257169A73261}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftFactoryView", "AircraftFactoryView\AircraftFactoryView.csproj", "{8C229B44-C69C-4C74-A22D-8BD06575899F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E455A67C-9BAF-4D99-A7DA-0F15BB4546B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E455A67C-9BAF-4D99-A7DA-0F15BB4546B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E455A67C-9BAF-4D99-A7DA-0F15BB4546B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E455A67C-9BAF-4D99-A7DA-0F15BB4546B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47E25470-E53F-4395-8A22-42EA660A8386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E25470-E53F-4395-8A22-42EA660A8386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E25470-E53F-4395-8A22-42EA660A8386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E25470-E53F-4395-8A22-42EA660A8386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BB8C3C8-B61B-4F01-8710-257169A73261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BB8C3C8-B61B-4F01-8710-257169A73261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BB8C3C8-B61B-4F01-8710-257169A73261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BB8C3C8-B61B-4F01-8710-257169A73261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C229B44-C69C-4C74-A22D-8BD06575899F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C229B44-C69C-4C74-A22D-8BD06575899F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C229B44-C69C-4C74-A22D-8BD06575899F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C229B44-C69C-4C74-A22D-8BD06575899F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

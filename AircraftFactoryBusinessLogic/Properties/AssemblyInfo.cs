@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("AircraftFactory")]
+[assembly: AssemblyTitle("AircraftFactoryBusinessLogic")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AircraftFactory")]
+[assembly: AssemblyProduct("AircraftFactoryBusinessLogic")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("e455a67c-9baf-4d99-a7da-0f15bb4546b3")]
+[assembly: Guid("47e25470-e53f-4395-8a22-42ea660a8386")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //
