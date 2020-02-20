@@ -1,4 +1,5 @@
-﻿using AircraftFactoryBusinessLogic.BindingModels;
+﻿using AircraftFactoryBusinessLogic;
+using AircraftFactoryBusinessLogic.BindingModels;
 using AircraftFactoryBusinessLogic.Interfaces;
 using AircraftFactoryBusinessLogic.ViewModels;
 using System;
@@ -21,9 +22,9 @@ namespace AircraftFactoryView
 
         private readonly IAircraftLogic logicA;
 
-        private readonly IMainLogic logicM;
+        private readonly MainLogic logicM;
 
-        public FormCreateOrder(IAircraftLogic logicI, IMainLogic logicM)
+        public FormCreateOrder(IAircraftLogic logicI, MainLogic logicM)
         {
             InitializeComponent();
             this.logicA = logicI;
