@@ -47,8 +47,8 @@
     <Compile Include="StockPart.cs" />
     <Compile Include="AircraftPart.cs" />
     <Compile Include="DataListSingleton.cs" />
-    <Compile Include="MainLogic.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="OrderLogic.cs" />
     <Compile Include="Part.cs" />
     <Compile Include="PartLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
