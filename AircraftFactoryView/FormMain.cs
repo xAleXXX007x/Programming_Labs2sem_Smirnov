@@ -1,4 +1,5 @@
-﻿using AircraftFactoryBusinessLogic.BindingModels;
+﻿using AircraftFactoryBusinessLogic;
+using AircraftFactoryBusinessLogic.BindingModels;
 using AircraftFactoryBusinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,15 @@ namespace AircraftFactoryView
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly IMainLogic logic;
+        private readonly MainLogic logic;
 
-        public FormMain(IMainLogic logic)
+        private readonly IOrderLogic orderLogic;
+
+        public FormMain(MainLogic logic, IOrderLogic orderLogic)
         {
             InitializeComponent();
             this.logic = logic;
+            this.orderLogic = orderLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -36,7 +40,7 @@ namespace AircraftFactoryView
             try
             {
                 dataGridView.DataSource = null;
-                dataGridView.DataSource = logic.GetOrders();
+                dataGridView.DataSource = orderLogic.Read(null);
                 dataGridView.Columns[0].Visible = false;
                 dataGridView.Columns[1].Visible = false;
             }
@@ -72,7 +76,7 @@ namespace AircraftFactoryView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.TakeOrderInWork(new OrderBindingModel { Id = id });
+                    logic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -89,7 +93,7 @@ namespace AircraftFactoryView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.FinishOrder(new OrderBindingModel { Id = id });
+                    logic.FinishOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -106,7 +110,7 @@ namespace AircraftFactoryView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.PayOrder(new OrderBindingModel { Id = id });
+                    logic.PayOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
