@@ -1,0 +1,206 @@
+﻿using AircraftFactoryBusinessLogic.Enums;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+
+namespace AircraftFactoryFileImplement
+{
+    public class FileDataListSingleton
+    {
+        private static FileDataListSingleton instance;
+
+        private readonly string PartFileName = "Part.xml";
+
+        private readonly string OrderFileName = "Order.xml";
+
+        private readonly string AircraftFileName = "Aircraft.xml";
+
+        private readonly string AircraftPartFileName = "AircraftPart.xml";
+
+        public List<Part> Parts { get; set; }
+
+        public List<Order> Orders { get; set; }
+
+        public List<Aircraft> Aircrafts { get; set; }
+
+        public List<AircraftPart> AircraftParts { get; set; }
+
+        private FileDataListSingleton()
+        {
+            Parts = LoadParts();
+            Orders = LoadOrders();
+            Aircrafts = LoadAircrafts();
+            AircraftParts = LoadAircraftParts();
+        }
+
+        public static FileDataListSingleton GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new FileDataListSingleton();
+            }
+            return instance;
+        }
+
+        ~FileDataListSingleton()
+        {
+            SaveParts();
+            SaveOrders();
+            SaveAircrafts();
+            SaveAircraftParts();
+        }
+
+        private List<Part> LoadParts()
+        {
+            var list = new List<Part>();
+            if (File.Exists(PartFileName))
+            {
+                XDocument xDocument = XDocument.Load(PartFileName);
+                var xElements = xDocument.Root.Elements("Part").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Part
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        PartName = elem.Element("PartName").Value
+                    });
+                }
+            }
+            return list;
+        }
+
+        private List<Order> LoadOrders()
+        {
+            var list = new List<Order>();
+            if (File.Exists(OrderFileName))
+            {
+                XDocument xDocument = XDocument.Load(OrderFileName);
+                var xElements = xDocument.Root.Elements("Order").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Order
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        AircraftId = Convert.ToInt32(elem.Element("AircraftId").Value),
+                        Count = Convert.ToInt32(elem.Element("Count").Value),
+                        Sum = Convert.ToDecimal(elem.Element("Sum").Value),
+                        Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value),
+                        DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
+                        DateImplement = string.IsNullOrEmpty(elem.Element("DateImplement").Value) ? (DateTime?)null : Convert.ToDateTime(elem.Element("DateImplement").Value)
+                    });
+                }
+            }
+            return list;
+        }
+
+        private List<Aircraft> LoadAircrafts()
+        {
+            var list = new List<Aircraft>();
+            if (File.Exists(AircraftFileName))
+            {
+                XDocument xDocument = XDocument.Load(AircraftFileName);
+                var xElements = xDocument.Root.Elements("Aircraft").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Aircraft
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        AircraftName = elem.Element("AircraftName").Value,
+                        Price = Convert.ToDecimal(elem.Element("Price").Value)
+                    });
+                }
+            }
+            return list;
+        }
+        private List<AircraftPart> LoadAircraftParts()
+        {
+            var list = new List<AircraftPart>();
+            if (File.Exists(AircraftPartFileName))
+            {
+                XDocument xDocument = XDocument.Load(AircraftPartFileName);
+                var xElements = xDocument.Root.Elements("AircraftPart").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new AircraftPart
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        AircraftId = Convert.ToInt32(elem.Element("AircraftId").Value),
+                        PartId = Convert.ToInt32(elem.Element("PartId").Value),
+                        Count = Convert.ToInt32(elem.Element("Count").Value)
+                    });
+                }
+            }
+            return list;
+        }
+        private void SaveParts()
+        {
+            if (Parts != null)
+            {
+                var xElement = new XElement("Parts");
+                foreach (var part in Parts)
+                {
+                    xElement.Add(new XElement("Part",
+                    new XAttribute("Id", part.Id),
+                    new XElement("PartName", part.PartName)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(PartFileName);
+            }
+        }
+        private void SaveOrders()
+        {
+            if (Orders != null)
+            {
+                var xElement = new XElement("Orders");
+                foreach (var order in Orders)
+                {
+                    xElement.Add(new XElement("Order",
+                    new XAttribute("Id", order.Id),
+                    new XElement("AircraftId", order.AircraftId),
+                    new XElement("Count", order.Count),
+                    new XElement("Sum", order.Sum),
+                    new XElement("Status", order.Status),
+                    new XElement("DateCreate", order.DateCreate),
+                    new XElement("DateImplement", order.DateImplement)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(OrderFileName);
+            }
+        }
+        private void SaveAircrafts()
+        {
+            if (Aircrafts != null)
+            {
+                var xElement = new XElement("Aircrafts");
+                foreach (var aircraft in Aircrafts)
+                {
+                    xElement.Add(new XElement("Aircraft",
+                    new XAttribute("Id", aircraft.Id),
+                    new XElement("AircraftName", aircraft.AircraftName),
+                    new XElement("Price", aircraft.Price)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(AircraftFileName);
+            }
+        }
+        private void SaveAircraftParts()
+        {
+            if (AircraftParts != null)
+            {
+                var xElement = new XElement("AircraftParts");
+                foreach (var aircraftPart in AircraftParts)
+                {
+                    xElement.Add(new XElement("AircraftPart",
+                    new XAttribute("Id", aircraftPart.Id),
+                    new XElement("AircraftId", aircraftPart.AircraftId),
+                    new XElement("PartId", aircraftPart.PartId),
+                    new XElement("Count", aircraftPart.Count)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(AircraftPartFileName);
+            }
+        }
+    }
+}
