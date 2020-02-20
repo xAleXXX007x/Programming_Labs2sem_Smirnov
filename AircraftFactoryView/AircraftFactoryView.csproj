@@ -54,6 +54,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormStockPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStockPart.designer.cs">
+      <DependentUpon>FormStockPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStock.designer.cs">
+      <DependentUpon>FormStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAircraft.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +77,12 @@
     </Compile>
     <Compile Include="FormAircraftPart.designer.cs">
       <DependentUpon>FormAircraftPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStocks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStocks.designer.cs">
+      <DependentUpon>FormStocks.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAircrafts.cs">
       <SubType>Form</SubType>
@@ -98,11 +116,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormStockPart.resx">
+      <DependentUpon>FormStockPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStock.resx">
+      <DependentUpon>FormStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAircraft.resx">
       <DependentUpon>FormAircraft.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAircraftPart.resx">
       <DependentUpon>FormAircraftPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStocks.resx">
+      <DependentUpon>FormStocks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAircrafts.resx">
       <DependentUpon>FormAircrafts.cs</DependentUpon>

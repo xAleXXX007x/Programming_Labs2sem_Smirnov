@@ -28,6 +28,7 @@ namespace AircraftFactoryView
             currentContainer.RegisterType<IPartLogic, PartLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IAircraftLogic, AircraftLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IMainLogic, MainLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStockLogic, StockLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StockLogic.cs" />
+    <Compile Include="Stock.cs" />
     <Compile Include="Aircraft.cs" />
     <Compile Include="AircraftLogic.cs" />
+    <Compile Include="StockPart.cs" />
     <Compile Include="AircraftPart.cs" />
     <Compile Include="DataListSingleton.cs" />
     <Compile Include="MainLogic.cs" />

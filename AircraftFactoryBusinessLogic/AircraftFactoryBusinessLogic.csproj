@@ -40,16 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModels\StockPartBindingModel.cs" />
+    <Compile Include="BindingModels\StockBindingModel.cs" />
     <Compile Include="BindingModels\AircraftBindingModel.cs" />
     <Compile Include="BindingModels\AircraftPartBindingModel.cs" />
     <Compile Include="BindingModels\OrderBindingModel.cs" />
     <Compile Include="BindingModels\PartBindingModel.cs" />
     <Compile Include="Enums\OrderStatus.cs" />
+    <Compile Include="Interfaces\IStockLogic.cs" />
     <Compile Include="Interfaces\IAircraftLogic.cs" />
     <Compile Include="Interfaces\IMainLogic.cs" />
     <Compile Include="Interfaces\IPartLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\StockPartViewModel.cs" />
     <Compile Include="ViewModels\AircraftPartViewModel.cs" />
+    <Compile Include="ViewModels\StockViewModel.cs" />
     <Compile Include="ViewModels\AircraftViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\PartViewModel.cs" />
