@@ -78,64 +78,6 @@ namespace AircraftFactoryView
             }
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormStockPart>();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                if (form.ModelView != null)
-                {
-                    if (id.HasValue)
-                    {
-                        form.ModelView.StockId = id.Value;
-                    }
-
-                    stockParts.Add(form.ModelView);
-                }
-
-                LoadData();
-            }
-        }
-
-        private void buttonUpd_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                var form = Container.Resolve<FormStockPart>();
-                form.ModelView = stockParts[dataGridView.SelectedRows[0].Cells[0].RowIndex];
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    stockParts[dataGridView.SelectedRows[0].Cells[0].RowIndex] = form.ModelView;
-                    LoadData();
-                }
-            }
-        }
-
-        private void buttonDel_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    try
-                    {
-                        stockParts.RemoveAt(dataGridView.SelectedRows[0].Cells[0].RowIndex);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    LoadData();
-                }
-            }
-        }
-
-        private void buttonRef_Click(object sender, EventArgs e)
-        {
-            LoadData();
-        }
-
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxName.Text))

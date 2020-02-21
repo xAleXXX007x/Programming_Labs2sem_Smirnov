@@ -1,4 +1,5 @@
-﻿using AircraftFactoryBusinessLogic.Interfaces;
+﻿using AircraftFactoryBusinessLogic.BindingModels;
+using AircraftFactoryBusinessLogic.Interfaces;
 using AircraftFactoryBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,14 +19,15 @@ namespace AircraftFactoryView
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        public StockPartViewModel ModelView { get; set; }
-
         private readonly IPartLogic logic;
 
-        public FormStockPart(IPartLogic logic)
+        private readonly IStockLogic stockLogic;
+
+        public FormStockPart(IPartLogic logic, IStockLogic stockLogic)
         {
             InitializeComponent();
             this.logic = logic;
+            this.stockLogic = stockLogic;
         }
 
         private void FormStockPart_Load(object sender, EventArgs e)
@@ -40,16 +42,20 @@ namespace AircraftFactoryView
                     comboBoxPart.DataSource = list;
                     comboBoxPart.SelectedItem = null;
                 }
+
+                List<StockViewModel> stockList = stockLogic.GetList();
+
+                if (stockList != null)
+                {
+                    comboBoxStocks.DisplayMember = "StockName";
+                    comboBoxStocks.ValueMember = "Id";
+                    comboBoxStocks.DataSource = stockList;
+                    comboBoxStocks.SelectedItem = null;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (ModelView != null)
-            {
-                comboBoxPart.Enabled = false;
-                comboBoxPart.SelectedValue = ModelView.PartId;
-                textBoxCount.Text = ModelView.Count.ToString();
             }
         }
 
@@ -67,21 +73,55 @@ namespace AircraftFactoryView
 
                 return;
             }
+            if (comboBoxStocks.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите склад", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
             try
             {
-                if (ModelView == null)
+                StockViewModel stock = stockLogic.GetElement((int)comboBoxStocks.SelectedValue);
+                List<StockPartViewModel> stockParts = stock.StockParts;
+                List<StockPartBindingModel> stockPartBM = new List<StockPartBindingModel>();
+                StockPartBindingModel partBM = null;
+
+                for (int i = 0; i < stockParts.Count; ++i)
                 {
-                    ModelView = new StockPartViewModel
+                    stockPartBM.Add(new StockPartBindingModel
+                    {
+                        Id = stockParts[i].Id,
+                        StockId = stockParts[i].StockId,
+                        PartId = stockParts[i].PartId,
+                        Count = stockParts[i].Count
+                    });
+
+                    if (stockParts[i].PartId == (int)comboBoxPart.SelectedValue)
+                    {
+                        partBM = stockPartBM.Last();
+                    }
+                }
+
+                if (partBM == null)
+                {
+                    stockPartBM.Add(new StockPartBindingModel
                     {
                         PartId = Convert.ToInt32(comboBoxPart.SelectedValue),
-                        PartName = comboBoxPart.Text,
-                        Count = Convert.ToInt32(textBoxCount.Text)
-                    };
+                        Count = Convert.ToInt32(textBoxCount.Text),
+                        StockId = stock.Id
+                    });
                 }
                 else
                 {
-                    ModelView.Count = Convert.ToInt32(textBoxCount.Text);
+                    partBM.Count += Convert.ToInt32(textBoxCount.Text);
                 }
+
+                stockLogic.UpdElement(new StockBindingModel
+                {
+                    Id = stock.Id,
+                    StockName = stock.StockName,
+                    StockParts = stockPartBM
+                });
 
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
