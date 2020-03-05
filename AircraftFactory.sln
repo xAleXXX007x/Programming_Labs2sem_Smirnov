@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftFactoryListImplemen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftFactoryView", "AircraftFactoryView\AircraftFactoryView.csproj", "{8C229B44-C69C-4C74-A22D-8BD06575899F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftFactoryFileImplement", "AircraftFactoryFileImplement\AircraftFactoryFileImplement.csproj", "{E7976101-3499-41E7-B7A4-8289465B2CCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AircraftFactoryFileImplement", "AircraftFactoryFileImplement\AircraftFactoryFileImplement.csproj", "{E7976101-3499-41E7-B7A4-8289465B2CCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircraftFactoryDatabaseImplement", "AircraftFactoryDatabaseImplement\AircraftFactoryDatabaseImplement.csproj", "{0E8869DE-E3E0-427A-A753-1E973E69853D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E7976101-3499-41E7-B7A4-8289465B2CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7976101-3499-41E7-B7A4-8289465B2CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7976101-3499-41E7-B7A4-8289465B2CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E8869DE-E3E0-427A-A753-1E973E69853D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E8869DE-E3E0-427A-A753-1E973E69853D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E8869DE-E3E0-427A-A753-1E973E69853D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E8869DE-E3E0-427A-A753-1E973E69853D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
