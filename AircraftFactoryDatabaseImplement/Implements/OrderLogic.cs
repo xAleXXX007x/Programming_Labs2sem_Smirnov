@@ -2,6 +2,7 @@
 using AircraftFactoryBusinessLogic.Interfaces;
 using AircraftFactoryBusinessLogic.ViewModels;
 using AircraftFactoryDatabaseImplement.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace AircraftFactoryDatabaseImplement.Implements
 
                 if (model != null)
                 {
-                    result.Add(CreateViewModel(context.Orders.FirstOrDefault(rec => rec.Id == model.Id)));
+                    result.Add(CreateViewModel(context.Orders.Include(rec => rec.Aircraft).FirstOrDefault(rec => rec.Id == model.Id)));
                 }
                 else
                 {
@@ -102,18 +103,11 @@ namespace AircraftFactoryDatabaseImplement.Implements
         {
             using (var context = new AircraftFactoryDatabase())
             {
-                Aircraft aircraft = context.Aircrafts.Where(rec => rec.Id == order.AircraftId).FirstOrDefault();
-
-                if (aircraft == null)
-                {
-                    throw new Exception("Элемент не найден");
-                }
-
                 return new OrderViewModel
                 {
                     Id = order.Id,
                     AircraftId = order.AircraftId,
-                    AircraftName = aircraft.AircraftName,
+                    AircraftName = order.Aircraft.AircraftName,
                     Count = order.Count,
                     Sum = order.Sum,
                     Status = order.Status,
