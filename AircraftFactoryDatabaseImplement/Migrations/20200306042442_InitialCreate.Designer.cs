@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AircraftFactoryDatabaseImplement.Migrations
 {
     [DbContext(typeof(AircraftFactoryDatabase))]
-    [Migration("20200305145635_InitialCreate")]
+    [Migration("20200306042442_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,8 +58,7 @@ namespace AircraftFactoryDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AircraftId")
-                        .IsUnique();
+                    b.HasIndex("AircraftId");
 
                     b.HasIndex("PartId");
 
@@ -117,8 +116,8 @@ namespace AircraftFactoryDatabaseImplement.Migrations
             modelBuilder.Entity("AircraftFactoryDatabaseImplement.Models.AircraftPart", b =>
                 {
                     b.HasOne("AircraftFactoryDatabaseImplement.Models.Aircraft", "Aircraft")
-                        .WithOne("AircraftPart")
-                        .HasForeignKey("AircraftFactoryDatabaseImplement.Models.AircraftPart", "AircraftId")
+                        .WithMany("AircraftParts")
+                        .HasForeignKey("AircraftId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

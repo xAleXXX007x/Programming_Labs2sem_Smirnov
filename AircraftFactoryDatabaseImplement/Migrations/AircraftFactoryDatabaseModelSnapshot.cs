@@ -56,8 +56,7 @@ namespace AircraftFactoryDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AircraftId")
-                        .IsUnique();
+                    b.HasIndex("AircraftId");
 
                     b.HasIndex("PartId");
 
@@ -115,8 +114,8 @@ namespace AircraftFactoryDatabaseImplement.Migrations
             modelBuilder.Entity("AircraftFactoryDatabaseImplement.Models.AircraftPart", b =>
                 {
                     b.HasOne("AircraftFactoryDatabaseImplement.Models.Aircraft", "Aircraft")
-                        .WithOne("AircraftPart")
-                        .HasForeignKey("AircraftFactoryDatabaseImplement.Models.AircraftPart", "AircraftId")
+                        .WithMany("AircraftParts")
+                        .HasForeignKey("AircraftId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

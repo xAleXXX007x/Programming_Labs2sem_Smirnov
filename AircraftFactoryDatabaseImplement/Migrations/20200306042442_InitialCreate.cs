@@ -88,8 +88,7 @@ namespace AircraftFactoryDatabaseImplement.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AircraftParts_AircraftId",
                 table: "AircraftParts",
-                column: "AircraftId",
-                unique: true);
+                column: "AircraftId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AircraftParts_PartId",

@@ -240,7 +240,7 @@
       <Name>AircraftFactoryBusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\AircraftFactoryDatabaseImplement\AircraftFactoryDatabaseImplement.csproj">
-      <Project>{0e8869de-e3e0-427a-a753-1e973e69853d}</Project>
+      <Project>{f75829d6-fa20-45fb-aeac-259fbd9b25a5}</Project>
       <Name>AircraftFactoryDatabaseImplement</Name>
     </ProjectReference>
     <ProjectReference Include="..\AircraftFactoryFileImplement\AircraftFactoryFileImplement.csproj">
