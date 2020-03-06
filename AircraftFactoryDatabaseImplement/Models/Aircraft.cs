@@ -16,7 +16,8 @@ namespace AircraftFactoryDatabaseImplement.Models
         [Required]
         public decimal Price { get; set; }
 
-        public virtual AircraftPart AircraftPart { get; set; }
+        [ForeignKey("AircraftId")]
+        public virtual List<AircraftPart> AircraftParts { get; set; }
 
         [ForeignKey("AircraftId")]
         public virtual List<Order> Orders { get; set; }
