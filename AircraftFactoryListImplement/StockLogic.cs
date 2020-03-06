@@ -129,40 +129,6 @@ namespace AircraftFactoryListImplement
                 Id = maxId + 1,
                 StockName = model.StockName
             });
-
-            int maxSId = 0;
-
-            for (int i = 0; i < source.StockParts.Count; ++i)
-            {
-                if (source.StockParts[i].Id > maxSId)
-                {
-                    maxSId = source.StockParts[i].Id;
-                }
-            }
-
-            for (int i = 0; i < model.StockParts.Count; ++i)
-            {
-                for (int j = 1; j < model.StockParts.Count; ++j)
-                {
-                    if (model.StockParts[i].PartId == model.StockParts[j].PartId)
-                    {
-                        model.StockParts[i].Count +=
-                        model.StockParts[j].Count;
-                        model.StockParts.RemoveAt(j--);
-                    }
-                }
-            }
-
-            for (int i = 0; i < model.StockParts.Count; ++i)
-            {
-                source.StockParts.Add(new StockPart
-                {
-                    Id = ++maxSId,
-                    StockId = maxId + 1,
-                    PartId = model.StockParts[i].PartId,
-                    Count = model.StockParts[i].Count
-                });
-            }
         }
         public void UpdElement(StockBindingModel model)
         {
@@ -188,71 +154,6 @@ namespace AircraftFactoryListImplement
             }
 
             source.Stocks[index].StockName = model.StockName;
-            int maxSId = 0;
-
-            for (int i = 0; i < source.StockParts.Count; ++i)
-            {
-                if (source.StockParts[i].Id > maxSId)
-                {
-                    maxSId = source.StockParts[i].Id;
-                }
-            }
-
-            for (int i = 0; i < source.StockParts.Count; ++i)
-            {
-                if (source.StockParts[i].StockId == model.Id)
-                {
-                    bool flag = true;
-
-                    for (int j = 0; j < model.StockParts.Count; ++j)
-                    {
-                        if (source.StockParts[i].Id ==
-                        model.StockParts[j].Id)
-                        {
-                            source.StockParts[i].Count =
-                            model.StockParts[j].Count;
-                            flag = false;
-
-                            break;
-                        }
-                    }
-
-                    if (flag)
-                    {
-                        source.StockParts.RemoveAt(i--);
-                    }
-                }
-            }
-
-            for (int i = 0; i < model.StockParts.Count; ++i)
-            {
-                if (model.StockParts[i].Id == 0)
-                {
-                    for (int j = 0; j < source.StockParts.Count; ++j)
-                    {
-                        if (source.StockParts[j].StockId == model.Id &&
-                        source.StockParts[j].PartId == model.StockParts[i].PartId)
-                        {
-                            source.StockParts[j].Count +=
-                            model.StockParts[i].Count;
-                            model.StockParts[i].Id = source.StockParts[j].Id;
-
-                            break;
-                        }
-                    }
-
-                    if (model.StockParts[i].Id == 0)
-                    {
-                        source.StockParts.Add(new StockPart
-                        {
-                            Id = ++maxSId,
-                            StockId = model.Id,
-                            PartId = model.StockParts[i].PartId,
-                            Count = model.StockParts[i].Count
-                        });
-                    }
-                }
-            }
         }
         public void DelElement(int id)
         {
