@@ -67,7 +67,10 @@ namespace AircraftFactoryDatabaseImplement.Implements
 
                 if (model != null)
                 {
-                    result.Add(CreateViewModel(context.Orders.Include(rec => rec.Aircraft).FirstOrDefault(rec => rec.Id == model.Id)));
+                    result.AddRange(context.Orders.Include(rec => rec.Aircraft)
+                        .Where(rec => (model.Id.HasValue && rec.Id == model.Id) ||
+                                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+                        .Select(rec => CreateViewModel(rec)));
                 }
                 else
                 {

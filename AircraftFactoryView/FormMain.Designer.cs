@@ -38,6 +38,13 @@
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AircraftPartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AircraftsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DayOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AircraftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пополнитьСкладToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.складыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -145,6 +152,61 @@
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // отчетыToolStripMenuItem
+            // 
+            this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PartsToolStripMenuItem,
+            this.AircraftPartsToolStripMenuItem,
+            this.OrdersToolStripMenuItem,
+            this.AircraftsToolStripMenuItem,
+            this.DayOrdersToolStripMenuItem,
+            this.AircraftToolStripMenuItem});
+            this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
+            this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.отчетыToolStripMenuItem.Text = "Отчеты";
+            // 
+            // PartsToolStripMenuItem
+            // 
+            this.PartsToolStripMenuItem.Name = "PartsToolStripMenuItem";
+            this.PartsToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.PartsToolStripMenuItem.Text = "Список запчастей";
+            this.PartsToolStripMenuItem.Click += new System.EventHandler(this.PartsToolStripMenuItem_Click);
+            // 
+            // AircraftPartsToolStripMenuItem
+            // 
+            this.AircraftPartsToolStripMenuItem.Name = "AircraftPartsToolStripMenuItem";
+            this.AircraftPartsToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.AircraftPartsToolStripMenuItem.Text = "Запчасти по самолетам";
+            this.AircraftPartsToolStripMenuItem.Click += new System.EventHandler(this.AircraftPartsToolStripMenuItem_Click);
+            // 
+            // OrdersToolStripMenuItem
+            // 
+            this.OrdersToolStripMenuItem.Name = "OrdersToolStripMenuItem";
+            this.OrdersToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.OrdersToolStripMenuItem.Text = "Список заказов";
+            this.OrdersToolStripMenuItem.Click += new System.EventHandler(this.OrdersToolStripMenuItem_Click);
+            // 
+            // AircraftsToolStripMenuItem
+            // 
+            this.AircraftsToolStripMenuItem.Name = "AircraftsToolStripMenuItem";
+            this.AircraftsToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.AircraftsToolStripMenuItem.Text = "Список самолётов";
+            this.AircraftsToolStripMenuItem.Click += new System.EventHandler(this.AircraftsToolStripMenuItem_Click);
+            // 
+            // DayOrdersToolStripMenuItem
+            // 
+            this.DayOrdersToolStripMenuItem.Name = "DayOrdersToolStripMenuItem";
+            this.DayOrdersToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.DayOrdersToolStripMenuItem.Text = "Заказы за день";
+            this.DayOrdersToolStripMenuItem.Click += new System.EventHandler(this.DayOrdersToolStripMenuItem_Click);
+            // 
+            // AircraftToolStripMenuItem
+            // 
+            this.AircraftToolStripMenuItem.Name = "AircraftToolStripMenuItem";
+            this.AircraftToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.AircraftToolStripMenuItem.Text = "Список самолётов и их запчастей";
+            this.AircraftToolStripMenuItem.Click += new System.EventHandler(this.AircraftToolStripMenuItem_Click);
+            // 
             // пополнитьСкладToolStripMenuItem
             // 
             this.пополнитьСкладToolStripMenuItem.Name = "складыToolStripMenuItem";
@@ -194,6 +256,13 @@
         private System.Windows.Forms.Button buttonOrderReady;
         private System.Windows.Forms.Button buttonTakeOrderInWork;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PartsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AircraftPartsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OrdersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AircraftsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DayOrdersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AircraftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пополнитьСкладToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem;
     }
