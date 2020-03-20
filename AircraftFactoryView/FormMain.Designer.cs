@@ -38,6 +38,13 @@
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AircraftPartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AircraftsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DayOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AircraftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -48,38 +55,36 @@
             this.запчастиToolStripMenuItem,
             this.самолетыToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
-            this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(115, 24);
+            this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
             // 
             // запчастиToolStripMenuItem
             // 
             this.запчастиToolStripMenuItem.Name = "запчастиToolStripMenuItem";
-            this.запчастиToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.запчастиToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.запчастиToolStripMenuItem.Text = "Запчасти";
             this.запчастиToolStripMenuItem.Click += new System.EventHandler(this.запчастиToolStripMenuItem_Click);
             // 
             // самолетыToolStripMenuItem
             // 
             this.самолетыToolStripMenuItem.Name = "самолетыToolStripMenuItem";
-            this.самолетыToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.самолетыToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.самолетыToolStripMenuItem.Text = "Самолеты";
             this.самолетыToolStripMenuItem.Click += new System.EventHandler(this.самолетыToolStripMenuItem_Click);
             // 
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(16, 33);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView.Location = new System.Drawing.Point(12, 27);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(835, 506);
+            this.dataGridView.Size = new System.Drawing.Size(626, 411);
             this.dataGridView.TabIndex = 1;
             // 
             // buttonCreateOrder
             // 
-            this.buttonCreateOrder.Location = new System.Drawing.Point(859, 33);
-            this.buttonCreateOrder.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCreateOrder.Location = new System.Drawing.Point(644, 27);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
-            this.buttonCreateOrder.Size = new System.Drawing.Size(192, 28);
+            this.buttonCreateOrder.Size = new System.Drawing.Size(144, 23);
             this.buttonCreateOrder.TabIndex = 2;
             this.buttonCreateOrder.Text = "Создать заказ";
             this.buttonCreateOrder.UseVisualStyleBackColor = true;
@@ -87,10 +92,9 @@
             // 
             // buttonRef
             // 
-            this.buttonRef.Location = new System.Drawing.Point(859, 176);
-            this.buttonRef.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonRef.Location = new System.Drawing.Point(644, 143);
             this.buttonRef.Name = "buttonRef";
-            this.buttonRef.Size = new System.Drawing.Size(192, 28);
+            this.buttonRef.Size = new System.Drawing.Size(144, 23);
             this.buttonRef.TabIndex = 3;
             this.buttonRef.Text = "Обновить";
             this.buttonRef.UseVisualStyleBackColor = true;
@@ -98,10 +102,9 @@
             // 
             // buttonPayOrder
             // 
-            this.buttonPayOrder.Location = new System.Drawing.Point(859, 140);
-            this.buttonPayOrder.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonPayOrder.Location = new System.Drawing.Point(644, 114);
             this.buttonPayOrder.Name = "buttonPayOrder";
-            this.buttonPayOrder.Size = new System.Drawing.Size(192, 28);
+            this.buttonPayOrder.Size = new System.Drawing.Size(144, 23);
             this.buttonPayOrder.TabIndex = 4;
             this.buttonPayOrder.Text = "Заказ оплачен";
             this.buttonPayOrder.UseVisualStyleBackColor = true;
@@ -109,10 +112,9 @@
             // 
             // buttonOrderReady
             // 
-            this.buttonOrderReady.Location = new System.Drawing.Point(859, 105);
-            this.buttonOrderReady.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonOrderReady.Location = new System.Drawing.Point(644, 85);
             this.buttonOrderReady.Name = "buttonOrderReady";
-            this.buttonOrderReady.Size = new System.Drawing.Size(192, 28);
+            this.buttonOrderReady.Size = new System.Drawing.Size(144, 23);
             this.buttonOrderReady.TabIndex = 5;
             this.buttonOrderReady.Text = "Заказ готов";
             this.buttonOrderReady.UseVisualStyleBackColor = true;
@@ -120,10 +122,9 @@
             // 
             // buttonTakeOrderInWork
             // 
-            this.buttonTakeOrderInWork.Location = new System.Drawing.Point(859, 69);
-            this.buttonTakeOrderInWork.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonTakeOrderInWork.Location = new System.Drawing.Point(644, 56);
             this.buttonTakeOrderInWork.Name = "buttonTakeOrderInWork";
-            this.buttonTakeOrderInWork.Size = new System.Drawing.Size(192, 28);
+            this.buttonTakeOrderInWork.Size = new System.Drawing.Size(144, 23);
             this.buttonTakeOrderInWork.TabIndex = 6;
             this.buttonTakeOrderInWork.Text = "Отдать на выполнение";
             this.buttonTakeOrderInWork.UseVisualStyleBackColor = true;
@@ -133,19 +134,74 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.справочникиToolStripMenuItem});
+            this.справочникиToolStripMenuItem,
+            this.отчетыToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // отчетыToolStripMenuItem
+            // 
+            this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PartsToolStripMenuItem,
+            this.AircraftPartsToolStripMenuItem,
+            this.OrdersToolStripMenuItem,
+            this.AircraftsToolStripMenuItem,
+            this.DayOrdersToolStripMenuItem,
+            this.AircraftToolStripMenuItem});
+            this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
+            this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.отчетыToolStripMenuItem.Text = "Отчеты";
+            // 
+            // PartsToolStripMenuItem
+            // 
+            this.PartsToolStripMenuItem.Name = "PartsToolStripMenuItem";
+            this.PartsToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.PartsToolStripMenuItem.Text = "Список запчастей";
+            this.PartsToolStripMenuItem.Click += new System.EventHandler(this.PartsToolStripMenuItem_Click);
+            // 
+            // AircraftPartsToolStripMenuItem
+            // 
+            this.AircraftPartsToolStripMenuItem.Name = "AircraftPartsToolStripMenuItem";
+            this.AircraftPartsToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.AircraftPartsToolStripMenuItem.Text = "Запчасти по самолетам";
+            this.AircraftPartsToolStripMenuItem.Click += new System.EventHandler(this.AircraftPartsToolStripMenuItem_Click);
+            // 
+            // OrdersToolStripMenuItem
+            // 
+            this.OrdersToolStripMenuItem.Name = "OrdersToolStripMenuItem";
+            this.OrdersToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.OrdersToolStripMenuItem.Text = "Список заказов";
+            this.OrdersToolStripMenuItem.Click += new System.EventHandler(this.OrdersToolStripMenuItem_Click);
+            // 
+            // AircraftsToolStripMenuItem
+            // 
+            this.AircraftsToolStripMenuItem.Name = "AircraftsToolStripMenuItem";
+            this.AircraftsToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.AircraftsToolStripMenuItem.Text = "Список самолётов";
+            this.AircraftsToolStripMenuItem.Click += new System.EventHandler(this.AircraftsToolStripMenuItem_Click);
+            // 
+            // DayOrdersToolStripMenuItem
+            // 
+            this.DayOrdersToolStripMenuItem.Name = "DayOrdersToolStripMenuItem";
+            this.DayOrdersToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.DayOrdersToolStripMenuItem.Text = "Заказы за день";
+            this.DayOrdersToolStripMenuItem.Click += new System.EventHandler(this.DayOrdersToolStripMenuItem_Click);
+            // 
+            // AircraftToolStripMenuItem
+            // 
+            this.AircraftToolStripMenuItem.Name = "AircraftToolStripMenuItem";
+            this.AircraftToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.AircraftToolStripMenuItem.Text = "Список самолётов и их запчастей";
+            this.AircraftToolStripMenuItem.Click += new System.EventHandler(this.AircraftToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.buttonTakeOrderInWork);
             this.Controls.Add(this.buttonOrderReady);
             this.Controls.Add(this.buttonPayOrder);
@@ -153,7 +209,6 @@
             this.Controls.Add(this.buttonCreateOrder);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
             this.Text = "Авиастроительный завод";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -176,6 +231,13 @@
         private System.Windows.Forms.Button buttonOrderReady;
         private System.Windows.Forms.Button buttonTakeOrderInWork;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PartsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AircraftPartsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OrdersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AircraftsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DayOrdersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AircraftToolStripMenuItem;
     }
 }
 

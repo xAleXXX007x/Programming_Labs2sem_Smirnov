@@ -1,5 +1,6 @@
 ﻿using AircraftFactoryBusinessLogic;
 using AircraftFactoryBusinessLogic.BindingModels;
+using AircraftFactoryBusinessLogic.BusinessLogics;
 using AircraftFactoryBusinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,14 @@ namespace AircraftFactoryView
 
         private readonly IOrderLogic orderLogic;
 
-        public FormMain(MainLogic logic, IOrderLogic orderLogic)
+        private readonly ReportLogic report;
+
+        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic report)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
+            this.report = report;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -123,6 +127,60 @@ namespace AircraftFactoryView
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void PartsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    report.SavePartsToWordFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void AircraftPartsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportAircraftParts>();
+            form.ShowDialog();
+        }
+
+        private void OrdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void AircraftsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    report.SaveAircraftsToWordFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void DayOrdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportDayOrders>();
+            form.ShowDialog();
+        }
+
+        private void AircraftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportAircrafts>();
+            form.ShowDialog();
         }
     }
 }
