@@ -13,8 +13,6 @@ namespace AircraftFactoryBusinessLogic.HelperModels
 
         public string Title { get; set; }
 
-        public List<ReportAircraftPartViewModel> AircraftParts { get; set; }
-
         public List<ReportOrdersViewModel> Orders { get; set; }
     }
 }

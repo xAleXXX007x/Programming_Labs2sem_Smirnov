@@ -58,177 +58,125 @@ namespace AircraftFactoryBusinessLogic
                     CellToName = "C1"
                 });
                 uint rowIndex = 2;
-                if (info.AircraftParts != null)
+                decimal sum = 0;
+                rowIndex++;
+                InsertCellInWorksheet(new ExcelCellParameters
                 {
-                    foreach (var ap in info.AircraftParts)
-                    {
-                        InsertCellInWorksheet(new ExcelCellParameters
-                        {
-                            Worksheet = worksheetPart.Worksheet,
-                            ShareStringPart = shareStringPart,
-                            ColumnName = "A",
-                            RowIndex = rowIndex,
-                            Text = ap.PartName,
-                            StyleIndex = 0U
-                        });
-                        rowIndex++;
-                        foreach (var aircraft in ap.Aircrafts)
-                        {
-                            InsertCellInWorksheet(new ExcelCellParameters
-                            {
-                                Worksheet = worksheetPart.Worksheet,
-                                ShareStringPart = shareStringPart,
-                                ColumnName = "B",
-                                RowIndex = rowIndex,
-                                Text = aircraft.Item1,
-                                StyleIndex = 1U
-                            });
-                            InsertCellInWorksheet(new ExcelCellParameters
-                            {
-                                Worksheet = worksheetPart.Worksheet,
-                                ShareStringPart = shareStringPart,
-                                ColumnName = "C",
-                                RowIndex = rowIndex,
-                                Text = aircraft.Item2.ToString(),
-                                StyleIndex = 1U
-                            });
-                            rowIndex++;
-                        }
-                        InsertCellInWorksheet(new ExcelCellParameters
-                        {
-                            Worksheet = worksheetPart.Worksheet,
-                            ShareStringPart = shareStringPart,
-                            ColumnName = "C",
-                            RowIndex = rowIndex,
-                            Text = ap.TotalCount.ToString(),
-                            StyleIndex = 0U
-                        });
-                        rowIndex++;
-                    }
-                }
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "A",
+                    RowIndex = 2,
+                    Text = "Дата заказа",
+                    StyleIndex = 0U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "B",
+                    RowIndex = 2,
+                    Text = "Изделие",
+                    StyleIndex = 0U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "C",
+                    RowIndex = 2,
+                    Text = "Количество",
+                    StyleIndex = 0U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "D",
+                    RowIndex = 2,
+                    Text = "Сумма",
+                    StyleIndex = 0U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "E",
+                    RowIndex = 2,
+                    Text = "Статус",
+                    StyleIndex = 0U
+                });
+                foreach (var order in info.Orders)
+                {
+                    sum += order.Sum;
 
-                if (info.Orders != null)
-                {
-                    decimal sum = 0;
-                    rowIndex++;
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
-                        RowIndex = 2,
-                        Text = "Дата заказа",
-                        StyleIndex = 0U
+                        RowIndex = rowIndex,
+                        Text = order.DateCreate.ToShortDateString(),
+                        StyleIndex = 1U
                     });
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "B",
-                        RowIndex = 2,
-                        Text = "Изделие",
-                        StyleIndex = 0U
+                        RowIndex = rowIndex,
+                        Text = order.AircraftName,
+                        StyleIndex = 1U
                     });
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "C",
-                        RowIndex = 2,
-                        Text = "Количество",
-                        StyleIndex = 0U
+                        RowIndex = rowIndex,
+                        Text = order.Count.ToString(),
+                        StyleIndex = 1U
                     });
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "D",
-                        RowIndex = 2,
-                        Text = "Сумма",
-                        StyleIndex = 0U
+                        RowIndex = rowIndex,
+                        Text = order.Sum.ToString(),
+                        StyleIndex = 1U
                     });
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "E",
-                        RowIndex = 2,
-                        Text = "Статус",
-                        StyleIndex = 0U
+                        RowIndex = rowIndex,
+                        Text = order.Status.ToString(),
+                        StyleIndex = 1U
                     });
-                    foreach (var order in info.Orders)
-                    {
-                        sum += order.Sum;
-
-                        InsertCellInWorksheet(new ExcelCellParameters
-                        {
-                            Worksheet = worksheetPart.Worksheet,
-                            ShareStringPart = shareStringPart,
-                            ColumnName = "A",
-                            RowIndex = rowIndex,
-                            Text = order.DateCreate.ToShortDateString(),
-                            StyleIndex = 1U
-                        });
-                        InsertCellInWorksheet(new ExcelCellParameters
-                        {
-                            Worksheet = worksheetPart.Worksheet,
-                            ShareStringPart = shareStringPart,
-                            ColumnName = "B",
-                            RowIndex = rowIndex,
-                            Text = order.AircraftName,
-                            StyleIndex = 1U
-                        });
-                        InsertCellInWorksheet(new ExcelCellParameters
-                        {
-                            Worksheet = worksheetPart.Worksheet,
-                            ShareStringPart = shareStringPart,
-                            ColumnName = "C",
-                            RowIndex = rowIndex,
-                            Text = order.Count.ToString(),
-                            StyleIndex = 1U
-                        });
-                        InsertCellInWorksheet(new ExcelCellParameters
-                        {
-                            Worksheet = worksheetPart.Worksheet,
-                            ShareStringPart = shareStringPart,
-                            ColumnName = "D",
-                            RowIndex = rowIndex,
-                            Text = order.Sum.ToString(),
-                            StyleIndex = 1U
-                        });
-                        InsertCellInWorksheet(new ExcelCellParameters
-                        {
-                            Worksheet = worksheetPart.Worksheet,
-                            ShareStringPart = shareStringPart,
-                            ColumnName = "E",
-                            RowIndex = rowIndex,
-                            Text = order.Status.ToString(),
-                            StyleIndex = 1U
-                        });
-                        rowIndex++;
-                    }
-
                     rowIndex++;
-
-                    InsertCellInWorksheet(new ExcelCellParameters
-                    {
-                        Worksheet = worksheetPart.Worksheet,
-                        ShareStringPart = shareStringPart,
-                        ColumnName = "C",
-                        RowIndex = rowIndex,
-                        Text = "Итого",
-                        StyleIndex = 2U
-                    });
-                    InsertCellInWorksheet(new ExcelCellParameters
-                    {
-                        Worksheet = worksheetPart.Worksheet,
-                        ShareStringPart = shareStringPart,
-                        ColumnName = "D",
-                        RowIndex = rowIndex,
-                        Text = sum.ToString(),
-                        StyleIndex = 2U
-                    });
                 }
+
+                rowIndex++;
+
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "C",
+                    RowIndex = rowIndex,
+                    Text = "Итого",
+                    StyleIndex = 2U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "D",
+                    RowIndex = rowIndex,
+                    Text = sum.ToString(),
+                    StyleIndex = 2U
+                });
 
                 workbookpart.Workbook.Save();
             }
