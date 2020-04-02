@@ -29,47 +29,28 @@ namespace AircraftFactoryBusinessLogic
                         JustificationValues = JustificationValues.Center
                     }
                 }));
-                if (info.Parts != null)
-                {
-                    foreach (var part in info.Parts)
-                    {
-                        docBody.AppendChild(CreateParagraph(new WordParagraph
-                        {
-                            Texts = new List<string> { part.PartName },
-                            TextProperties = new WordParagraphProperties
-                            {
-                                Size = "24",
-                                JustificationValues = JustificationValues.Both
-                            }
-                        }));
-                    }
-                }
 
-                if (info.Aircrafts != null)
+                foreach (var aircraft in info.Aircrafts)
                 {
-                    foreach (var aircraft in info.Aircrafts)
+                    Paragraph paragraph = new Paragraph();
+                    Run run = new Run();
+                    RunProperties runProperties = new RunProperties();
+                    runProperties.AppendChild(new Bold());
+                    run.AppendChild(runProperties);
+                    run.AppendChild(new Text
                     {
-                        docBody.AppendChild(CreateParagraph(new WordParagraph
-                        {
-                            Texts = new List<string> { aircraft.AircraftName },
-                            TextProperties = new WordParagraphProperties
-                            {
-                                Size = "24",
-                                JustificationValues = JustificationValues.Both,
-                                Bold = true
-                            }
-                        }));
-
-                        docBody.AppendChild(CreateParagraph(new WordParagraph
-                        {
-                            Texts = new List<string> { "Цена: ", aircraft.Price.ToString() },
-                            TextProperties = new WordParagraphProperties
-                            {
-                                Size = "20",
-                                JustificationValues = JustificationValues.Both
-                            }
-                        }));
-                    }
+                        Text = aircraft.AircraftName
+                    }); 
+                    paragraph.AppendChild(run);
+                    run = new Run();
+                    runProperties = new RunProperties();
+                    run.AppendChild(runProperties);
+                    run.AppendChild(new Text
+                    {
+                        Text = "; Цена: " + aircraft.Price.ToString()
+                    });
+                    paragraph.AppendChild(run);
+                    docBody.AppendChild(paragraph);
                 }
 
                 docBody.AppendChild(CreateSectionProperties());

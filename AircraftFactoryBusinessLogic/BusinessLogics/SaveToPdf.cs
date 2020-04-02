@@ -23,62 +23,29 @@ namespace AircraftFactoryBusinessLogic
             paragraph.Style = "NormalTitle";
             paragraph.Style = "Normal";
             var table = document.LastSection.AddTable();
-            if (info.Orders != null)
-            {
-                paragraph = section.AddParagraph($"с {info.DateFrom.ToShortDateString()} по { info.DateTo.ToShortDateString()} ");
-                paragraph.Format.SpaceAfter = "1cm";
-                paragraph.Format.Alignment = ParagraphAlignment.Center;
-                List<string> columns = new List<string> { "3cm", "6cm", "3cm", "2cm", "3cm" };
-                foreach (var elem in columns)
-                {
-                    table.AddColumn(elem);
-                }
-                CreateRow(new PdfRowParameters
-                {
-                    Table = table,
-                    Texts = new List<string> { "Дата заказа", "Самолет", "Количество", "Сумма", "Статус" },
-                    Style = "NormalTitle",
-                    ParagraphAlignment = ParagraphAlignment.Center
-                });
 
-                foreach (var order in info.Orders)
-                {
-                    CreateRow(new PdfRowParameters
-                    {
-                        Table = table,
-                        Texts = new List<string> { order.DateCreate.ToShortDateString(),
-                        order.AircraftName, order.Count.ToString(), order.Sum.ToString(), order.Status },
-                        Style = "Normal",
-                        ParagraphAlignment = ParagraphAlignment.Left
-                    });
-                }
+            List<string> columns = new List<string> { "3cm", "3cm", "4cm" };
+            foreach (var elem in columns)
+            {
+                table.AddColumn(elem);
             }
-
-            if (info.Aircrafts != null)
+            CreateRow(new PdfRowParameters
             {
-                List<string> columns = new List<string> { "3cm", "3cm", "4cm" };
-                foreach (var elem in columns)
-                {
-                    table.AddColumn(elem);
-                }
+                Table = table,
+                Texts = new List<string> { "Самолёт", "Запчасть", "Количество" },
+                Style = "NormalTitle",
+                ParagraphAlignment = ParagraphAlignment.Center
+            });
+
+            foreach (var part in info.Aircrafts)
+            {
                 CreateRow(new PdfRowParameters
                 {
                     Table = table,
-                    Texts = new List<string> { "Самолёт", "Запчасть", "Количество" },
-                    Style = "NormalTitle",
-                    ParagraphAlignment = ParagraphAlignment.Center
+                    Texts = new List<string> { part.AircraftName, part.PartName, part.Count.ToString() },
+                    Style = "Normal",
+                    ParagraphAlignment = ParagraphAlignment.Left
                 });
-
-                foreach (var part in info.Aircrafts)
-                {
-                    CreateRow(new PdfRowParameters
-                    {
-                        Table = table,
-                        Texts = new List<string> { part.AircraftName, part.PartName, part.Count.ToString() },
-                        Style = "Normal",
-                        ParagraphAlignment = ParagraphAlignment.Left
-                    });
-                }
             }
 
             PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always)

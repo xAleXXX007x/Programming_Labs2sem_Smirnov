@@ -80,7 +80,7 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
                 Sum = x.Sum,
                 Status = Enum.GetName(typeof(OrderStatus), x.Status)
             })
-           .ToList();
+            .ToList();
         }
 
         public List<ReportAircraftsViewModel> GetAircrafts()
@@ -104,38 +104,6 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
             }
 
             return list;
-        }
-
-        public void SavePartsToWordFile(ReportBindingModel model)
-        {
-            SaveToWord.CreateDoc(new WordInfo
-            {
-                FileName = model.FileName,
-                Title = "Список запчастей",
-                Parts = partLogic.GetList()
-            });
-        }
-
-        public void SaveAircraftPartToExcelFile(ReportBindingModel model)
-        {
-            SaveToExcel.CreateDoc(new ExcelInfo
-            {
-                FileName = model.FileName,
-                Title = "Список запчастей",
-                AircraftParts = GetAircraftPart()
-            });
-        }
-
-        public void SaveOrdersToPdfFile(ReportBindingModel model)
-        {
-            SaveToPdf.CreateDoc(new PdfInfo
-            {
-                FileName = model.FileName,
-                Title = "Список заказов",
-                DateFrom = model.DateFrom.Value,
-                DateTo = model.DateTo.Value,
-                Orders = GetOrders(model)
-            });
         }
 
         public void SaveAircraftsToWordFile(ReportBindingModel model)

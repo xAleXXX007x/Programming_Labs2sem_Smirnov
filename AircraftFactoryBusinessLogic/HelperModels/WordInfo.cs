@@ -11,8 +11,6 @@ namespace AircraftFactoryBusinessLogic.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-        public List<PartViewModel> Parts { get; set; }
-
         public List<AircraftViewModel> Aircrafts { get; set; }
     }
 }
