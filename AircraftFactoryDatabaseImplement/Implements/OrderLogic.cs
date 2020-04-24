@@ -1,4 +1,5 @@
 ﻿using AircraftFactoryBusinessLogic.BindingModels;
+using AircraftFactoryBusinessLogic.Enums;
 using AircraftFactoryBusinessLogic.Interfaces;
 using AircraftFactoryBusinessLogic.ViewModels;
 using AircraftFactoryDatabaseImplement.Models;
@@ -71,7 +72,10 @@ namespace AircraftFactoryDatabaseImplement.Implements
                         .Where(rec => (model.Id.HasValue && rec.Id == model.Id) ||
                                 (model.DateFrom.HasValue && model.DateTo.HasValue &&
                                 rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
-                                (rec.ClientId == model.ClientId))
+                                (rec.ClientId == model.ClientId) ||
+                                (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue) ||
+                                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && 
+                                rec.Status == OrderStatus.Выполняется))
                         .Select(rec => CreateViewModel(rec)));
                 }
                 else
@@ -88,16 +92,18 @@ namespace AircraftFactoryDatabaseImplement.Implements
             {
                 Aircraft aircraft = context.Aircrafts.Where(rec => rec.Id == model.AircraftId).FirstOrDefault();
                 Client client = context.Clients.Where(rec => rec.Id == model.ClientId).FirstOrDefault();
+                Implementer implementer = context.Implementers.Where(rec => rec.Id == model.ImplementerId).FirstOrDefault();
 
-                if (aircraft == null || client == null)
+                if (aircraft == null || client == null || model.ImplementerId.HasValue && implementer == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
 
-
                 order.AircraftId = model.AircraftId;
-                order.ClientId = model.ClientId;
+                order.ClientId = (int)model.ClientId;
                 order.ClientFIO = client.ClientFIO;
+                order.ImplementerId = model.ImplementerId;
+                order.ImplementerFIO = model.ImplementerId.HasValue ? implementer.ImplementerFIO : String.Empty;
                 order.Count = model.Count;
                 order.Sum = model.Count * aircraft.Price;
                 order.Status = model.Status;
@@ -117,6 +123,8 @@ namespace AircraftFactoryDatabaseImplement.Implements
                     Id = order.Id,
                     ClientId = order.ClientId,
                     ClientFIO = order.ClientFIO,
+                    ImplementerId = order.ImplementerId,
+                    ImplementerFIO = order.ImplementerFIO,  
                     AircraftId = order.AircraftId,
                     AircraftName = order.Aircraft.AircraftName,
                     Count = order.Count,

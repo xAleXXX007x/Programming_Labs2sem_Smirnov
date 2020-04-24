@@ -72,9 +72,11 @@
     <Compile Include="BindingModels\ClientBindingModel.cs" />
     <Compile Include="BindingModels\CreateOrderBindingModel.cs" />
     <Compile Include="BindingModels\ChangeStatusBindingModel.cs" />
+    <Compile Include="BindingModels\ImplementerBindingModel.cs" />
     <Compile Include="BindingModels\OrderBindingModel.cs" />
     <Compile Include="BindingModels\PartBindingModel.cs" />
     <Compile Include="BusinessLogics\ReportLogic.cs" />
+    <Compile Include="BusinessLogics\WorkModeling.cs" />
     <Compile Include="HelperModels\ExcelCellParameters.cs" />
     <Compile Include="HelperModels\ExcelInfo.cs" />
     <Compile Include="HelperModels\ExcelMergeParameters.cs" />
@@ -88,7 +90,9 @@
     <Compile Include="BusinessLogics\SaveToPdf.cs" />
     <Compile Include="BusinessLogics\SaveToWord.cs" />
     <Compile Include="Interfaces\IClientLogic.cs" />
+    <Compile Include="Interfaces\IImplementerLogic.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
+    <Compile Include="ViewModels\ImplementerViewModel.cs" />
     <Compile Include="ViewModels\ReportAircraftPartViewModel.cs" />
     <Compile Include="BindingModels\ReportBindingModel.cs" />
     <Compile Include="Enums\OrderStatus.cs" />

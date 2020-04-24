@@ -74,13 +74,16 @@ namespace AircraftFactoryFileImplement
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             Aircraft aircraft = source.Aircrafts.Where(rec => rec.Id == model.AircraftId).FirstOrDefault();
+            Implementer implementer = source.Implementers.Where(rec => rec.Id == model.AircraftId).FirstOrDefault();
 
-            if (aircraft == null)
+            if (aircraft == null || order.ImplementerId.HasValue && implementer == null)
             {
                 throw new Exception("Элемент не найден");
             }
 
             order.AircraftId = model.AircraftId;
+            order.ImplementerId = model.ImplementerId;
+            order.ImplementerFIO = implementer.ImplementerFIO;
             order.Count = model.Count;
             order.Sum = model.Count * aircraft.Price;
             order.Status = model.Status;
@@ -93,8 +96,9 @@ namespace AircraftFactoryFileImplement
         private OrderViewModel CreateViewModel(Order order)
         {
             Aircraft aircraft = source.Aircrafts.Where(rec => rec.Id == order.AircraftId).FirstOrDefault();
+            Implementer implementer = source.Implementers.Where(rec => rec.Id == model.AircraftId).FirstOrDefault();
 
-            if (aircraft == null)
+            if (aircraft == null || order.ImplementerId.HasValue && implementer == null)
             {
                 throw new Exception("Элемент не найден");
             }
@@ -104,6 +108,8 @@ namespace AircraftFactoryFileImplement
                 Id = order.Id,
                 AircraftId = order.AircraftId,
                 AircraftName = aircraft.AircraftName,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = implementer.ImplementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,

@@ -18,6 +18,8 @@ namespace AircraftFactoryListImplement
 
         public List<Client> Clients { get; set; }
 
+        public List<Implementer> Implementers { get; set; }
+
         private DataListSingleton()
         {
             Parts = new List<Part>();
@@ -25,6 +27,7 @@ namespace AircraftFactoryListImplement
             Aircrafts = new List<Aircraft>();
             AircraftParts = new List<AircraftPart>();
             Clients = new List<Client>();
+            Implementers = new List<Implementer>();
         }
 
         public static DataListSingleton GetInstance()
