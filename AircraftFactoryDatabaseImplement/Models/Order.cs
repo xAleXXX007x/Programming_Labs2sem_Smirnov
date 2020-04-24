@@ -10,7 +10,11 @@ namespace AircraftFactoryDatabaseImplement.Models
     {
         public int Id { get; set; }
 
+        public int ClientId { get; set; }
+
         public int AircraftId { get; set; }
+
+        public string ClientFIO { get; set; }
 
         [Required]
         public int Count { get; set; }

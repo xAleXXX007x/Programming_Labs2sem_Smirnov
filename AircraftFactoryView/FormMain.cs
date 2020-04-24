@@ -47,6 +47,7 @@ namespace AircraftFactoryView
                 dataGridView.DataSource = orderLogic.Read(null);
                 dataGridView.Columns[0].Visible = false;
                 dataGridView.Columns[1].Visible = false;
+                dataGridView.Columns[2].Visible = false;
             }
             catch (Exception ex)
             {
@@ -153,6 +154,12 @@ namespace AircraftFactoryView
         private void AircraftToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportAircrafts>();
+            form.ShowDialog();
+        }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClients>();
             form.ShowDialog();
         }
     }

@@ -63,6 +63,27 @@ namespace AircraftFactoryDatabaseImplement.Migrations
                     b.ToTable("AircraftParts");
                 });
 
+            modelBuilder.Entity("AircraftFactoryDatabaseImplement.Models.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClientFIO")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
+
             modelBuilder.Entity("AircraftFactoryDatabaseImplement.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -71,6 +92,12 @@ namespace AircraftFactoryDatabaseImplement.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AircraftId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClientFIO")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<int>("Count")

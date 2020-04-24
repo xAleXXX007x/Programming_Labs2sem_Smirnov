@@ -16,12 +16,15 @@ namespace AircraftFactoryListImplement
 
         public List<AircraftPart> AircraftParts { get; set; }
 
+        public List<Client> Clients { get; set; }
+
         private DataListSingleton()
         {
             Parts = new List<Part>();
             Orders = new List<Order>();
             Aircrafts = new List<Aircraft>();
             AircraftParts = new List<AircraftPart>();
+            Clients = new List<Client>();
         }
 
         public static DataListSingleton GetInstance()

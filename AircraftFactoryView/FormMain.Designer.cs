@@ -42,6 +42,7 @@
             this.AircraftsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DayOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AircraftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +51,8 @@
             // 
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.запчастиToolStripMenuItem,
-            this.самолетыToolStripMenuItem});
+            this.самолетыToolStripMenuItem,
+            this.клиентыToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -58,14 +60,14 @@
             // запчастиToolStripMenuItem
             // 
             this.запчастиToolStripMenuItem.Name = "запчастиToolStripMenuItem";
-            this.запчастиToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.запчастиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.запчастиToolStripMenuItem.Text = "Запчасти";
             this.запчастиToolStripMenuItem.Click += new System.EventHandler(this.запчастиToolStripMenuItem_Click);
             // 
             // самолетыToolStripMenuItem
             // 
             this.самолетыToolStripMenuItem.Name = "самолетыToolStripMenuItem";
-            this.самолетыToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.самолетыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.самолетыToolStripMenuItem.Text = "Самолеты";
             this.самолетыToolStripMenuItem.Click += new System.EventHandler(this.самолетыToolStripMenuItem_Click);
             // 
@@ -170,6 +172,13 @@
             this.AircraftToolStripMenuItem.Text = "Список самолётов и их запчастей";
             this.AircraftToolStripMenuItem.Click += new System.EventHandler(this.AircraftToolStripMenuItem_Click);
             // 
+            // клиентыToolStripMenuItem
+            // 
+            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
+            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.клиентыToolStripMenuItem.Text = "Клиенты";
+            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,6 +217,7 @@
         private System.Windows.Forms.ToolStripMenuItem AircraftsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DayOrdersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AircraftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
     }
 }
 
