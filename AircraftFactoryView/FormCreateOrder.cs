@@ -24,11 +24,14 @@ namespace AircraftFactoryView
 
         private readonly MainLogic logicM;
 
-        public FormCreateOrder(IAircraftLogic logicI, MainLogic logicM)
+        private readonly IClientLogic logicC;
+
+        public FormCreateOrder(IAircraftLogic logicI, MainLogic logicM, IClientLogic logicC)
         {
             InitializeComponent();
             this.logicA = logicI;
             this.logicM = logicM;
+            this.logicC = logicC;
         }
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
@@ -40,6 +43,12 @@ namespace AircraftFactoryView
                 comboBoxAircraft.DisplayMember = "AircraftName";
                 comboBoxAircraft.ValueMember = "Id";
                 comboBoxAircraft.SelectedItem = null;
+
+                comboBoxClient.DataSource = null;
+                comboBoxClient.DataSource = logicC.Read(null);
+                comboBoxClient.DisplayMember = "ClientFIO";
+                comboBoxClient.ValueMember = "Id";
+                comboBoxClient.SelectedItem = null;
             }
             catch (Exception ex)
             {
@@ -90,13 +99,21 @@ namespace AircraftFactoryView
                 return;
             }
 
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
             try
             {
                 logicM.CreateOrder(new OrderBindingModel
                 {
                     AircraftId = Convert.ToInt32(comboBoxAircraft.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
-                    Sum = Convert.ToDecimal(textBoxSum.Text)
+                    Sum = Convert.ToDecimal(textBoxSum.Text),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue)
                 });
 
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);

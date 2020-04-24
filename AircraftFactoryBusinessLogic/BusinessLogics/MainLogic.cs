@@ -29,6 +29,7 @@ namespace AircraftFactoryBusinessLogic
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 AircraftId = model.AircraftId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
@@ -54,6 +55,8 @@ namespace AircraftFactoryBusinessLogic
             {
                 Id = order.Id,
                 AircraftId = order.AircraftId,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -77,6 +80,8 @@ namespace AircraftFactoryBusinessLogic
             {
                 Id = order.Id,
                 AircraftId = order.AircraftId,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -99,6 +104,8 @@ namespace AircraftFactoryBusinessLogic
             {
                 Id = order.Id,
                 AircraftId = order.AircraftId,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

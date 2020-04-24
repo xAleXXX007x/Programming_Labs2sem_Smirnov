@@ -26,6 +26,8 @@ namespace AircraftFactoryDatabaseImplement
 
         public virtual DbSet<Order> Orders { set; get; }
 
+        public virtual DbSet<Client> Clients { set; get; }
+
         public virtual DbSet<Stock> Stocks { set; get; }
 
         public virtual DbSet<StockPart> StockParts { set; get; }

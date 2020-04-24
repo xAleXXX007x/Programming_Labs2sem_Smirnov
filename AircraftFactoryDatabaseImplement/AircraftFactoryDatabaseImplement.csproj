@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
   <Import Project="..\packages\Microsoft.EntityFrameworkCore.Design.3.1.4\build\net461\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('..\packages\Microsoft.EntityFrameworkCore.Design.3.1.4\build\net461\Microsoft.EntityFrameworkCore.Design.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -160,6 +164,7 @@
     <Compile Include="AircraftFactoryDatabase.cs" />
     <Compile Include="Implements\StockLogic.cs" />
     <Compile Include="Implements\AircraftLogic.cs" />
+    <Compile Include="Implements\ClientLogic.cs" />
     <Compile Include="Implements\OrderLogic.cs" />
     <Compile Include="Implements\PartLogic.cs" />
     <Compile Include="Migrations\20200306042442_InitialCreate.cs" />
@@ -170,11 +175,16 @@
     <Compile Include="Migrations\20200524112236_StockUpdate.designer.cs">
       <DependentUpon>20200524112236_StockUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200403060519_WebUpdate.cs" />
+    <Compile Include="Migrations\20200403060519_WebUpdate.designer.cs">
+      <DependentUpon>20200403060519_WebUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AircraftFactoryDatabaseModelSnapshot.cs" />
     <Compile Include="Models\Stock.cs" />
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\StockPart.cs" />
     <Compile Include="Models\AircraftPart.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Part.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

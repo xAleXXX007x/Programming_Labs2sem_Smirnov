@@ -69,7 +69,9 @@ namespace AircraftFactoryDatabaseImplement.Implements
                 {
                     result.AddRange(context.Orders.Include(rec => rec.Aircraft)
                         .Where(rec => (model.Id.HasValue && rec.Id == model.Id) ||
-                                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+                                (model.DateFrom.HasValue && model.DateTo.HasValue &&
+                                rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+                                (rec.ClientId == model.ClientId))
                         .Select(rec => CreateViewModel(rec)));
                 }
                 else
@@ -85,13 +87,17 @@ namespace AircraftFactoryDatabaseImplement.Implements
             using (var context = new AircraftFactoryDatabase())
             {
                 Aircraft aircraft = context.Aircrafts.Where(rec => rec.Id == model.AircraftId).FirstOrDefault();
+                Client client = context.Clients.Where(rec => rec.Id == model.ClientId).FirstOrDefault();
 
-                if (aircraft == null)
+                if (aircraft == null || client == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
 
+
                 order.AircraftId = model.AircraftId;
+                order.ClientId = model.ClientId;
+                order.ClientFIO = client.ClientFIO;
                 order.Count = model.Count;
                 order.Sum = model.Count * aircraft.Price;
                 order.Status = model.Status;
@@ -109,6 +115,8 @@ namespace AircraftFactoryDatabaseImplement.Implements
                 return new OrderViewModel
                 {
                     Id = order.Id,
+                    ClientId = order.ClientId,
+                    ClientFIO = order.ClientFIO,
                     AircraftId = order.AircraftId,
                     AircraftName = order.Aircraft.AircraftName,
                     Count = order.Count,

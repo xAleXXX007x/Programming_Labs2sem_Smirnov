@@ -57,6 +57,7 @@
     <Reference Include="System.IO.Packaging, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Packaging.4.7.0\lib\net46\System.IO.Packaging.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +69,7 @@
   <ItemGroup>
     <Compile Include="BindingModels\AircraftBindingModel.cs" />
     <Compile Include="BindingModels\AircraftPartBindingModel.cs" />
+    <Compile Include="BindingModels\ClientBindingModel.cs" />
     <Compile Include="BindingModels\CreateOrderBindingModel.cs" />
     <Compile Include="BindingModels\ChangeStatusBindingModel.cs" />
     <Compile Include="BindingModels\OrderBindingModel.cs" />
@@ -85,6 +87,9 @@
     <Compile Include="BusinessLogics\SaveToExcel.cs" />
     <Compile Include="BusinessLogics\SaveToPdf.cs" />
     <Compile Include="BusinessLogics\SaveToWord.cs" />
+    <Compile Include="Interfaces\IClientLogic.cs" />
+    <Compile Include="ViewModels\ClientViewModel.cs" />
+    <Compile Include="ViewModels\ReportAircraftPartViewModel.cs" />
     <Compile Include="ViewModels\ReportStockPartViewModel.cs" />
     <Compile Include="BindingModels\ReportBindingModel.cs" />
     <Compile Include="BindingModels\StockBindingModel.cs" />

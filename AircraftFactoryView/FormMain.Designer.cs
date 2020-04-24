@@ -43,6 +43,7 @@
             this.AircraftsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DayOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AircraftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокСкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗапчастейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пополнитьСкладToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +57,7 @@
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.запчастиToolStripMenuItem,
             this.самолетыToolStripMenuItem,
+            this.клиентыToolStripMenuItem,
             this.складыToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
@@ -187,6 +189,13 @@
             this.AircraftToolStripMenuItem.Text = "Список самолётов и их запчастей";
             this.AircraftToolStripMenuItem.Click += new System.EventHandler(this.AircraftToolStripMenuItem_Click);
             // 
+            // клиентыToolStripMenuItem
+            // 
+            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
+            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.клиентыToolStripMenuItem.Text = "Клиенты";
+            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
+            // 
             // списокСкладовToolStripMenuItem
             // 
             this.списокСкладовToolStripMenuItem.Name = "списокСкладовToolStripMenuItem";
@@ -253,6 +262,7 @@
         private System.Windows.Forms.ToolStripMenuItem AircraftsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DayOrdersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AircraftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пополнитьСкладToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокСкладовToolStripMenuItem;
