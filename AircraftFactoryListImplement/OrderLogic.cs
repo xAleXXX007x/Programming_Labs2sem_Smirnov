@@ -95,12 +95,25 @@ namespace AircraftFactoryListImplement
                 }
             }
 
-            if (aircraft == null)
+            Implementer implementer = null;
+
+            foreach (Implementer a in source.Implementers)
+            {
+                if (a.Id == model.ImplementerId)
+                {
+                    implementer = a;
+                    break;
+                }
+            }
+
+            if (aircraft == null || model.ImplementerId.HasValue && implementer == null)
             {
                 throw new Exception("Элемент не найден");
             }
 
             order.AircraftId = model.AircraftId;
+            order.ImplementerId = (int)model.ImplementerId;
+            order.ImplementerFIO = implementer.ImplementerFIO;
             order.Count = model.Count;
             order.Sum = model.Count * aircraft.Price;
             order.Status = model.Status;
@@ -114,7 +127,7 @@ namespace AircraftFactoryListImplement
         {
             Aircraft aircraft = null;
 
-            foreach(Aircraft a in source.Aircrafts)
+            foreach (Aircraft a in source.Aircrafts)
             {
                 if (a.Id == order.AircraftId)
                 {
@@ -123,7 +136,18 @@ namespace AircraftFactoryListImplement
                 }
             }
 
-            if (aircraft == null)
+            Implementer implementer = null;
+
+            foreach (Implementer a in source.Implementers)
+            {
+                if (a.Id == order.ImplementerId)
+                {
+                    implementer = a;
+                    break;
+                }
+            }
+
+            if (aircraft == null || order.ImplementerId.HasValue && implementer == null)
             {
                 throw new Exception("Элемент не найден");
             }
@@ -133,6 +157,8 @@ namespace AircraftFactoryListImplement
                 Id = order.Id,
                 AircraftId = order.AircraftId,
                 AircraftName = aircraft.AircraftName,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = implementer.ImplementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,

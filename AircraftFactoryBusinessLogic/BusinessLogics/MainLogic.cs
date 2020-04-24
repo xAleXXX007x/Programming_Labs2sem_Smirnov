@@ -37,32 +37,43 @@ namespace AircraftFactoryBusinessLogic
             });
         }
 
+        private readonly object locker = new object();
+
+
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];
-            if (order == null)
+            lock (locker)
             {
-                throw new Exception("Не найден заказ");
-            }
-            if (order.Status != OrderStatus.Принят)
-            {
-                throw new Exception("Заказ не в статусе \"Принят\"");
-            }
+                var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];
+                if (order == null)
+                {
+                    throw new Exception("Не найден заказ");
+                }
+                if (order.Status != OrderStatus.Принят)
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\"");
+                }
+                if (order.ImplementerId != null)
+                {
+                    throw new Exception("Заказ уже занят");
+                }
 
-            stockLogic.WithdrawStock(order);
+                stockLogic.WithdrawStock(order);
 
-            orderLogic.CreateOrUpdate(new OrderBindingModel
-            {
-                Id = order.Id,
-                AircraftId = order.AircraftId,
-                ClientId = order.ClientId,
-                ClientFIO = order.ClientFIO,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    AircraftId = order.AircraftId,
+                    ClientId = order.ClientId,
+                    ClientFIO = order.ClientFIO,
+                    ImplementerId = model.ImplementerId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется
+                });
+            }
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -82,6 +93,7 @@ namespace AircraftFactoryBusinessLogic
                 AircraftId = order.AircraftId,
                 ClientId = order.ClientId,
                 ClientFIO = order.ClientFIO,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -106,6 +118,7 @@ namespace AircraftFactoryBusinessLogic
                 AircraftId = order.AircraftId,
                 ClientId = order.ClientId,
                 ClientFIO = order.ClientFIO,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

@@ -44,7 +44,9 @@
     <Compile Include="StockLogic.cs" />
     <Compile Include="AircraftLogic.cs" />
     <Compile Include="AircraftPart.cs" />
+    <Compile Include="Implementer.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="ImplementerLogic.cs" />
     <Compile Include="ClientLogic.cs" />
     <Compile Include="DataListSingleton.cs" />
     <Compile Include="Order.cs" />

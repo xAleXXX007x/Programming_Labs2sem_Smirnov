@@ -18,6 +18,8 @@ namespace AircraftFactoryListImplement
 
         public List<Client> Clients { get; set; }
 
+        public List<Implementer> Implementers { get; set; }
+
         public List<Stock> Stocks { get; set; }
 
         public List<StockPart> StockParts { get; set; }
@@ -29,6 +31,7 @@ namespace AircraftFactoryListImplement
             Aircrafts = new List<Aircraft>();
             AircraftParts = new List<AircraftPart>();
             Clients = new List<Client>();
+            Implementers = new List<Implementer>();
             Stocks = new List<Stock>();
             StockParts = new List<StockPart>();
         }

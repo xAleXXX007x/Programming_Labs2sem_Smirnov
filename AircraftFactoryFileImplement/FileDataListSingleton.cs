@@ -21,6 +21,8 @@ namespace AircraftFactoryFileImplement
 
         private readonly string ClientFileName = "Client.xml";
 
+        private readonly string ImplementerFileName = "Implementer.xml";
+
         private readonly string StockFileName = "Stock.xml";
 
         private readonly string StockPartFileName = "StockPart.xml";
@@ -35,6 +37,8 @@ namespace AircraftFactoryFileImplement
 
         public List<Client> Clients { get; set; }
 
+        public List<Implementer> Implementers { get; set; }
+
         public List<Stock> Stocks { get; set; }
 
         public List<StockPart> StockParts { get; set; }
@@ -46,6 +50,7 @@ namespace AircraftFactoryFileImplement
             Aircrafts = LoadAircrafts();
             AircraftParts = LoadAircraftParts();
             Clients = LoadClients();
+            Implementers = LoadImplementers();
             Stocks = LoadStocks();
             StockParts = LoadStockParts();
         }
@@ -66,6 +71,7 @@ namespace AircraftFactoryFileImplement
             SaveAircrafts();
             SaveAircraftParts();
             SaveClients();
+            SaveImplementers();
             SaveStocks();
             SaveStockParts();
         }
@@ -168,6 +174,27 @@ namespace AircraftFactoryFileImplement
                         ClientFIO = elem.Element("ClientFIO").Value,
                         Email = elem.Element("Email").Value,
                         Password = elem.Element("Password").Value
+                    });
+                }
+            }
+            return list;
+        }
+
+        private List<Client> LoadImplementers()
+        {
+            var list = new List<Implementer>();
+            if (File.Exists(ImplementerFileName))
+            {
+                XDocument xDocument = XDocument.Load(ImplementerFileName);
+                var xElements = xDocument.Root.Elements("Implementer").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ImplementerFIO = elem.Element("ImplementerFIO").Value,
+                        WorkingTime = Convert.ToInt32(elem.Element("WorkingTime").Value),
+                        PauseTime = Convert.ToInt32(elem.Element("PauseTime").Value)
                     });
                 }
             }
@@ -298,6 +325,24 @@ namespace AircraftFactoryFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ClientFileName);
+            }
+        }
+
+        private void SaveImplementers()
+        {
+            if (Implementers != null)
+            {
+                var xElement = new XElement("Implementers");
+                foreach (var implementer in Implementers)
+                {
+                    xElement.Add(new XElement("Implementer",
+                    new XAttribute("Id", implementer.Id),
+                    new XElement("ImplementerFIO", implementer.ImplementerFIO),
+                    new XElement("WorkingTime", implementer.WorkingTime),
+                    new XElement("PauseTime", implementer.PauseTime)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ImplementerFileName);
             }
         }
 

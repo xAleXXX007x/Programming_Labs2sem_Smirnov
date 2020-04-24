@@ -16,6 +16,10 @@ namespace AircraftFactoryDatabaseImplement.Models
 
         public string ClientFIO { get; set; }
 
+        public int? ImplementerId { get; set; }
+
+        public string ImplementerFIO { get; set; }
+
         [Required]
         public int Count { get; set; }
 
