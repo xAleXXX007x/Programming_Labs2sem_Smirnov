@@ -13,6 +13,6 @@ namespace AircraftFactoryBusinessLogic.HelperModels
 
         public string Title { get; set; }
 
-        public List<ReportOrdersViewModel> Orders { get; set; }
+        public List<IGrouping<DateTime, OrderViewModel>> Orders { get; set; }
     }
 }

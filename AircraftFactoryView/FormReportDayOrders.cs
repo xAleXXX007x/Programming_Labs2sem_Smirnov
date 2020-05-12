@@ -46,14 +46,17 @@ namespace AircraftFactoryView
                 {
                     decimal sum = 0;
                     dataGridView.Rows.Clear();
-                    foreach (var elem in orders)
+                    foreach (var elemGroup in orders)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.DateCreate, elem.AircraftName, elem.Count, elem.Sum, elem.Status });
-                        sum += elem.Sum;
+                        foreach (var elem in elemGroup)
+                        {
+                            dataGridView.Rows.Add(new object[] { elem.AircraftName, elem.Count, elem.Sum, elem.Status });
+                            sum += elem.Sum;
+                        }
                     }
 
                     dataGridView.Rows.Add(new object[] { });
-                    dataGridView.Rows.Add(new object[] { "", "", "Итого", sum });
+                    dataGridView.Rows.Add(new object[] { "", "Итого", sum });
                 }
             }
             catch (Exception ex)
