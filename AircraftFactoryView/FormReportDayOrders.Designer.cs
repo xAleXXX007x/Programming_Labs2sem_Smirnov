@@ -30,12 +30,11 @@
         {
             this.buttonSaveExcel = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ColumnAircraft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +52,6 @@
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnDate,
             this.ColumnAircraft,
             this.ColumnCount,
             this.ColumnSum,
@@ -63,10 +61,13 @@
             this.dataGridView.Size = new System.Drawing.Size(580, 428);
             this.dataGridView.TabIndex = 1;
             // 
-            // ColumnDate
+            // dateTimePicker
             // 
-            this.ColumnDate.HeaderText = "Дата заказа";
-            this.ColumnDate.Name = "ColumnDate";
+            this.dateTimePicker.Location = new System.Drawing.Point(153, 12);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(123, 20);
+            this.dateTimePicker.TabIndex = 2;
+            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker_ValueChanged);
             // 
             // ColumnAircraft
             // 
@@ -88,14 +89,6 @@
             this.ColumnStatus.HeaderText = "Статус";
             this.ColumnStatus.Name = "ColumnStatus";
             // 
-            // dateTimePicker
-            // 
-            this.dateTimePicker.Location = new System.Drawing.Point(153, 12);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(123, 20);
-            this.dateTimePicker.TabIndex = 2;
-            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker_ValueChanged);
-            // 
             // FormReportDayOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -116,11 +109,10 @@
 
         private System.Windows.Forms.Button buttonSaveExcel;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAircraft;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSum;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStatus;
-        private System.Windows.Forms.DateTimePicker dateTimePicker;
     }
 }

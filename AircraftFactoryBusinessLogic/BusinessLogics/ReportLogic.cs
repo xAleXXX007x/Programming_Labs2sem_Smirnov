@@ -65,21 +65,15 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
             return list;
         }
 
-        public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
+        public List<IGrouping<DateTime, OrderViewModel>> GetOrders(ReportBindingModel model)
         {
             return orderLogic.Read(new OrderBindingModel
             {
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
             })
-            .Select(x => new ReportOrdersViewModel
-            {
-                DateCreate = x.DateCreate,
-                AircraftName = x.AircraftName,
-                Count = x.Count,
-                Sum = x.Sum,
-                Status = Enum.GetName(typeof(OrderStatus), x.Status)
-            })
+            .GroupBy(rec => rec.DateCreate.Date)
+            .OrderBy(rec => rec.Key)
             .ToList();
         }
 
