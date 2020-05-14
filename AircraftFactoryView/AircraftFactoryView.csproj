@@ -188,6 +188,24 @@
     <Compile Include="FormParts.designer.cs">
       <DependentUpon>FormParts.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStock.designer.cs">
+      <DependentUpon>FormStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStockPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStockPart.designer.cs">
+      <DependentUpon>FormStockPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStocks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStocks.designer.cs">
+      <DependentUpon>FormStocks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAircraft.resx">
@@ -210,6 +228,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormParts.resx">
       <DependentUpon>FormParts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStock.resx">
+      <DependentUpon>FormStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStockPart.resx">
+      <DependentUpon>FormStockPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStocks.resx">
+      <DependentUpon>FormStocks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -244,7 +271,7 @@
       <Name>AircraftFactoryDatabaseImplement</Name>
     </ProjectReference>
     <ProjectReference Include="..\AircraftFactoryFileImplement\AircraftFactoryFileImplement.csproj">
-      <Project>{e7976101-3499-41e7-b7a4-8289465b2ccc}</Project>
+      <Project>{41b9e68a-135a-4919-a4b7-f1062e82cb95}</Project>
       <Name>AircraftFactoryFileImplement</Name>
     </ProjectReference>
     <ProjectReference Include="..\AircraftFactoryListImplement\AircraftFactoryListImplement.csproj">

@@ -17,5 +17,7 @@ namespace AircraftFactoryBusinessLogic.Interfaces
         void FinishOrder(OrderBindingModel model);
 
         void PayOrder(OrderBindingModel model);
+
+        void RefillStock(StockBindingModel model, StockPartBindingModel partModel);
     }
 }
