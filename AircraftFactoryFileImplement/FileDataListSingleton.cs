@@ -277,9 +277,9 @@ namespace AircraftFactoryFileImplement
                 var xElement = new XElement("StockParts");
                 foreach (var stockPart in StockParts)
                 {
-                    xElement.Add(new XElement("AircraftPart",
+                    xElement.Add(new XElement("StockPart",
                     new XAttribute("Id", stockPart.Id),
-                    new XElement("AircraftId", stockPart.StockId),
+                    new XElement("StockId", stockPart.StockId),
                     new XElement("PartId", stockPart.PartId),
                     new XElement("Count", stockPart.Count)));
                 }
