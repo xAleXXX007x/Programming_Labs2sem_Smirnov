@@ -1,6 +1,7 @@
 ﻿using AircraftFactoryBusinessLogic.BindingModels;
 using AircraftFactoryBusinessLogic.Enums;
 using AircraftFactoryBusinessLogic.Interfaces;
+using AircraftFactoryBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,13 @@ namespace AircraftFactoryBusinessLogic
 
         private readonly IStockLogic stockLogic;
 
-        public MainLogic(IOrderLogic orderLogic, IStockLogic stockLogic)
+        private readonly IAircraftLogic aircraftLogic;
+
+        public MainLogic(IOrderLogic orderLogic, IStockLogic stockLogic, IAircraftLogic aircraftLogic)
         {
             this.orderLogic = orderLogic;
             this.stockLogic = stockLogic;
+            this.aircraftLogic = aircraftLogic;
         }
         public void CreateOrder(OrderBindingModel model)
         {
@@ -43,6 +47,97 @@ namespace AircraftFactoryBusinessLogic
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
+
+            var aircraft = aircraftLogic.GetElement(order.AircraftId);
+            var stocks = stockLogic.GetList();
+
+            foreach (var part in aircraft.AircraftParts)
+            {
+                int count = 0;
+
+                foreach (var stock in stockLogic.GetList())
+                {
+                    foreach (var stockPart in stock.StockParts)
+                    {
+                        if (stockPart.PartId.Equals(part.PartId))
+                        {
+                            count += stockPart.Count;
+                        }
+                    }
+                }
+
+                if (count < part.Count * order.Count)
+                {
+                    throw new Exception("Недостаточно запчастей \"" + part.PartName + "\" для выполнения заказа");
+                } else
+                {
+                    int partsLeft = part.Count * order.Count;
+
+                    foreach (var stock in stocks)
+                    {
+                        foreach (var stockPart in stock.StockParts)
+                        {
+                            if (partsLeft > 0)
+                            {
+                                if (stockPart.PartId.Equals(part.PartId))
+                                {
+                                    if (stockPart.Count <= partsLeft)
+                                    {
+                                        partsLeft -= stockPart.Count;
+                                        stock.StockParts.Remove(stockPart);
+
+                                        if (partsLeft == 0)
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        stockPart.Count -= partsLeft;
+                                        partsLeft = 0;
+
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (partsLeft == 0)
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            foreach (var stock in stocks)
+            {
+                List<StockPartBindingModel> parts = new List<StockPartBindingModel>();
+
+                foreach (var part in stock.StockParts)
+                {
+                    if (part.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    parts.Add(new StockPartBindingModel
+                    {
+                        Id = part.Id,
+                        StockId = part.StockId,
+                        PartId = part.PartId,
+                        Count = part.Count
+                    });
+                }
+
+                stockLogic.UpdElement(new StockBindingModel
+                {
+                    Id = stock.Id,
+                    StockName = stock.StockName,
+                    StockParts = parts
+                });
+            }
+
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,

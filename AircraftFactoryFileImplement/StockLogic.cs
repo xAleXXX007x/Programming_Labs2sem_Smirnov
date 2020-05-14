@@ -93,7 +93,28 @@ namespace AircraftFactoryFileImplement
                 throw new Exception("Элемент не найден");
             }
             element.StockName = model.StockName;
+
+            int maxSPId = source.StockParts.Count > 0 ? source.StockParts.Max(rec => rec.Id) : 0;
+            foreach (var part in model.StockParts)
+            {
+                var stockPart = source.StockParts.FirstOrDefault(rec => rec.StockId == model.Id && rec.PartId == part.PartId);
+
+                if (stockPart != null)
+                {
+                    stockPart.Count = part.Count;
+                } else
+                {
+                    source.StockParts.Add(new StockPart
+                    {
+                        Id = ++maxSPId,
+                        StockId = model.Id,
+                        PartId = part.PartId,
+                        Count = part.Count
+                    });
+                }
+            }
         }
+
         public void DelElement(int id)
         {
             Stock element = source.Stocks.FirstOrDefault(rec => rec.Id == id);
