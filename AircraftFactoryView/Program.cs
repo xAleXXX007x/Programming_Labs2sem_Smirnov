@@ -30,6 +30,7 @@ namespace AircraftFactoryView
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IAircraftLogic, AircraftLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStockLogic, StockLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

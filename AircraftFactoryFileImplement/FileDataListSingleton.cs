@@ -19,6 +19,10 @@ namespace AircraftFactoryFileImplement
 
         private readonly string AircraftPartFileName = "AircraftPart.xml";
 
+        private readonly string StockFileName = "Stock.xml";
+
+        private readonly string StockPartFileName = "StockPart.xml";
+
         public List<Part> Parts { get; set; }
 
         public List<Order> Orders { get; set; }
@@ -27,12 +31,18 @@ namespace AircraftFactoryFileImplement
 
         public List<AircraftPart> AircraftParts { get; set; }
 
+        public List<Stock> Stocks { get; set; }
+
+        public List<StockPart> StockParts { get; set; }
+
         private FileDataListSingleton()
         {
             Parts = LoadParts();
             Orders = LoadOrders();
             Aircrafts = LoadAircrafts();
             AircraftParts = LoadAircraftParts();
+            Stocks = LoadStocks();
+            StockParts = LoadStockParts();
         }
 
         public static FileDataListSingleton GetInstance()
@@ -50,6 +60,8 @@ namespace AircraftFactoryFileImplement
             SaveOrders();
             SaveAircrafts();
             SaveAircraftParts();
+            SaveStocks();
+            SaveStockParts();
         }
 
         private List<Part> LoadParts()
@@ -134,6 +146,46 @@ namespace AircraftFactoryFileImplement
             }
             return list;
         }
+
+        private List<Stock> LoadStocks()
+        {
+            var list = new List<Stock>();
+            if (File.Exists(StockFileName))
+            {
+                XDocument xDocument = XDocument.Load(StockFileName);
+                var xElements = xDocument.Root.Elements("Stock").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Stock
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        StockName = elem.Element("StockName").Value
+                    });
+                }
+            }
+            return list;
+        }
+        private List<StockPart> LoadStockParts()
+        {
+            var list = new List<StockPart>();
+            if (File.Exists(StockPartFileName))
+            {
+                XDocument xDocument = XDocument.Load(StockPartFileName);
+                var xElements = xDocument.Root.Elements("StockPart").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new StockPart
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        StockId = Convert.ToInt32(elem.Element("StockId").Value),
+                        PartId = Convert.ToInt32(elem.Element("PartId").Value),
+                        Count = Convert.ToInt32(elem.Element("Count").Value)
+                    });
+                }
+            }
+            return list;
+        }
+
         private void SaveParts()
         {
             if (Parts != null)
@@ -200,6 +252,39 @@ namespace AircraftFactoryFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(AircraftPartFileName);
+            }
+        }
+
+        private void SaveStocks()
+        {
+            if (Stocks != null)
+            {
+                var xElement = new XElement("Stocks");
+                foreach (var stock in Stocks)
+                {
+                    xElement.Add(new XElement("Stock",
+                    new XAttribute("Id", stock.Id),
+                    new XElement("StockName", stock.StockName)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(StockFileName);
+            }
+        }
+        private void SaveStockParts()
+        {
+            if (StockParts != null)
+            {
+                var xElement = new XElement("StockParts");
+                foreach (var stockPart in StockParts)
+                {
+                    xElement.Add(new XElement("AircraftPart",
+                    new XAttribute("Id", stockPart.Id),
+                    new XElement("AircraftId", stockPart.StockId),
+                    new XElement("PartId", stockPart.PartId),
+                    new XElement("Count", stockPart.Count)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(StockPartFileName);
             }
         }
     }

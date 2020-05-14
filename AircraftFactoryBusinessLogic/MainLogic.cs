@@ -12,9 +12,13 @@ namespace AircraftFactoryBusinessLogic
     public class MainLogic
     {
         private readonly IOrderLogic orderLogic;
-        public MainLogic(IOrderLogic orderLogic)
+
+        private readonly IStockLogic stockLogic;
+
+        public MainLogic(IOrderLogic orderLogic, IStockLogic stockLogic)
         {
             this.orderLogic = orderLogic;
+            this.stockLogic = stockLogic;
         }
         public void CreateOrder(OrderBindingModel model)
         {
@@ -96,5 +100,37 @@ namespace AircraftFactoryBusinessLogic
             });
         }
 
+        public void RefillStock(StockBindingModel model, StockPartBindingModel partModel)
+        {
+            var stock = stockLogic.GetElement(model.Id);
+            if (stock == null)
+            {
+                throw new Exception("Не найден склад");
+            }
+
+            List<StockPartBindingModel> stockParts = model.StockParts;
+            bool found = false;
+            foreach (StockPartBindingModel stockPart in stockParts)
+            {
+                if (stockPart.PartId == partModel.PartId)
+                {
+                    stockPart.Count += partModel.Count;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                stockParts.Add(partModel);
+            }
+
+            stockLogic.UpdElement(new StockBindingModel
+            {
+                Id = stock.Id,
+                StockName = stock.StockName,
+                StockParts = stockParts
+            });
+        }
     }
 }
