@@ -50,7 +50,6 @@
     <Compile Include="BindingModels\StockPartBindingModel.cs" />
     <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Interfaces\IAircraftLogic.cs" />
-    <Compile Include="Interfaces\IMainLogic.cs" />
     <Compile Include="Interfaces\IOrderLogic.cs" />
     <Compile Include="Interfaces\IPartLogic.cs" />
     <Compile Include="Interfaces\IStockLogic.cs" />
