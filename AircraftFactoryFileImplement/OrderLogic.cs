@@ -63,7 +63,10 @@ namespace AircraftFactoryFileImplement
 
             if (model != null)
             {
-                result.Add(CreateViewModel(source.Orders.FirstOrDefault(rec => rec.Id == model.Id)));
+                result.Add(CreateViewModel(source.Orders.FirstOrDefault(rec => (model.Id.HasValue && rec.Id == model.Id) ||
+                                (model.DateFrom.HasValue && model.DateTo.HasValue &&
+                                rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+                                (rec.ClientId == model.ClientId))));
             } else
             {
                 result.AddRange(source.Orders.Select(rec => CreateViewModel(rec)));
