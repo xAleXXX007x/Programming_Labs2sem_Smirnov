@@ -101,16 +101,25 @@ namespace AircraftFactoryFileImplement
 
                 if (stockPart != null)
                 {
-                    stockPart.Count = part.Count;
+                    if (part.Count <= 0)
+                    {
+                        source.StockParts.Remove(stockPart);
+                    } else
+                    {
+                        stockPart.Count = part.Count;
+                    }
                 } else
                 {
-                    source.StockParts.Add(new StockPart
+                    if (part.Count > 0)
                     {
-                        Id = ++maxSPId,
-                        StockId = model.Id,
-                        PartId = part.PartId,
-                        Count = part.Count
-                    });
+                        source.StockParts.Add(new StockPart
+                        {
+                            Id = ++maxSPId,
+                            StockId = model.Id,
+                            PartId = part.PartId,
+                            Count = part.Count
+                        });
+                    }
                 }
             }
         }

@@ -55,7 +55,7 @@ namespace AircraftFactoryBusinessLogic
             {
                 int count = 0;
 
-                foreach (var stock in stockLogic.GetList())
+                foreach (var stock in stocks)
                 {
                     foreach (var stockPart in stock.StockParts)
                     {
@@ -75,6 +75,8 @@ namespace AircraftFactoryBusinessLogic
 
                     foreach (var stock in stocks)
                     {
+                        List<StockPartViewModel> delete = new List<StockPartViewModel>();
+
                         foreach (var stockPart in stock.StockParts)
                         {
                             if (partsLeft > 0)
@@ -84,7 +86,8 @@ namespace AircraftFactoryBusinessLogic
                                     if (stockPart.Count <= partsLeft)
                                     {
                                         partsLeft -= stockPart.Count;
-                                        stock.StockParts.Remove(stockPart);
+
+                                        stockPart.Count = 0;
 
                                         if (partsLeft == 0)
                                         {
@@ -116,11 +119,6 @@ namespace AircraftFactoryBusinessLogic
 
                 foreach (var part in stock.StockParts)
                 {
-                    if (part.Count == 0)
-                    {
-                        continue;
-                    }
-
                     parts.Add(new StockPartBindingModel
                     {
                         Id = part.Id,
