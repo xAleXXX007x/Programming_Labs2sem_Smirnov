@@ -48,6 +48,8 @@
     <Compile Include="ImplementerLogic.cs" />
     <Compile Include="ClientLogic.cs" />
     <Compile Include="DataListSingleton.cs" />
+    <Compile Include="MessageInfo.cs" />
+    <Compile Include="MessageInfoLogic.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderLogic.cs" />
     <Compile Include="Part.cs" />

@@ -21,7 +21,9 @@ namespace AircraftFactoryFileImplement
 
         private readonly string ClientFileName = "Client.xml";
 
-        private readonly string ImplementerFileName = "Client.xml";
+        private readonly string ImplementerFileName = "Implementer.xml";
+
+        private readonly string MessageInfoesFileName = "MessageInfoes.xml";
 
         public List<Part> Parts { get; set; }
 
@@ -35,6 +37,8 @@ namespace AircraftFactoryFileImplement
 
         public List<Implementer> Implementers { get; set; }
 
+        public List<MessageInfo> MessageInfoes { get; set; }
+
         private FileDataListSingleton()
         {
             Parts = LoadParts();
@@ -43,6 +47,7 @@ namespace AircraftFactoryFileImplement
             AircraftParts = LoadAircraftParts();
             Clients = LoadClients();
             Implementers = LoadImplementers();
+            MessageInfoes = LoadMessageInfoes();
         }
 
         public static FileDataListSingleton GetInstance()
@@ -62,6 +67,7 @@ namespace AircraftFactoryFileImplement
             SaveAircraftParts();
             SaveClients();
             SaveImplementers();
+            SaveMessageInfoes();
         }
 
         private List<Part> LoadParts()
@@ -189,6 +195,29 @@ namespace AircraftFactoryFileImplement
             return list;
         }
 
+        private List<MessageInfo> LoadMessageInfoes()
+        {
+            var list = new List<MessageInfo>();
+            if (File.Exists(MessageInfoesFileName))
+            {
+                XDocument xDocument = XDocument.Load(MessageInfoesFileName);
+                var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new MessageInfo
+                    {
+                        MessageId = elem.Attribute("MessageId").Value,
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+                        SenderName = elem.Attribute("SenderName").Value,
+                        DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery").Value),
+                        Subject = elem.Attribute("Subject").Value,
+                        Body = elem.Attribute("Body").Value
+                    });
+                }
+            }
+            return list;
+        }
+
         private void SaveParts()
         {
             if (Parts != null)
@@ -291,6 +320,26 @@ namespace AircraftFactoryFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ImplementerFileName);
+            }
+        }
+
+        private void SaveMessageInfoes()
+        {
+            if (MessageInfoes != null)
+            {
+                var xElement = new XElement("MessageInfoes");
+                foreach (var messageInfo in MessageInfoes)
+                {
+                    xElement.Add(new XElement("MessageInfo",
+                    new XAttribute("MessageId", messageInfo.MessageId),
+                    new XElement("ClientId", messageInfo.ClientId),
+                    new XElement("SenderName", messageInfo.SenderName),
+                    new XElement("DateDelivery", messageInfo.DateDelivery),
+                    new XElement("Subject", messageInfo.Subject),
+                    new XElement("Body", messageInfo.Body)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(MessageInfoesFileName);
             }
         }
     }
