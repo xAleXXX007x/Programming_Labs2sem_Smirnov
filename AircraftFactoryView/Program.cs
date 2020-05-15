@@ -1,6 +1,6 @@
 ﻿using AircraftFactoryBusinessLogic;
 using AircraftFactoryBusinessLogic.Interfaces;
-using AircraftFactoryDatabaseImplement.Implements;
+using AircraftFactoryFileImplement;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -30,6 +30,7 @@ namespace AircraftFactoryView
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IAircraftLogic, AircraftLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStockLogic, StockLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

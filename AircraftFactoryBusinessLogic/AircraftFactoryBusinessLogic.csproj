@@ -46,16 +46,21 @@
     <Compile Include="BindingModels\ChangeStatusBindingModel.cs" />
     <Compile Include="BindingModels\OrderBindingModel.cs" />
     <Compile Include="BindingModels\PartBindingModel.cs" />
+    <Compile Include="BindingModels\StockBindingModel.cs" />
+    <Compile Include="BindingModels\StockPartBindingModel.cs" />
     <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Interfaces\IAircraftLogic.cs" />
     <Compile Include="Interfaces\IOrderLogic.cs" />
     <Compile Include="Interfaces\IPartLogic.cs" />
+    <Compile Include="Interfaces\IStockLogic.cs" />
     <Compile Include="MainLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AircraftPartViewModel.cs" />
     <Compile Include="ViewModels\AircraftViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\PartViewModel.cs" />
+    <Compile Include="ViewModels\StockPartViewModel.cs" />
+    <Compile Include="ViewModels\StockViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

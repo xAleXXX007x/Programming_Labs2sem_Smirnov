@@ -22,12 +22,12 @@ namespace AircraftFactoryFileImplement
         {
             Order tempOrder = model.Id.HasValue ? null : new Order { Id = 1 };
             
-            if (!model.Id.HasValue)
-            {
-                tempOrder.Id = source.Orders.FirstOrDefault(rec => rec.Id >= tempOrder.Id).Id + 1;
-            } else
+            if (model.Id.HasValue)
             {
                 tempOrder = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            } else
+            {
+                tempOrder.Id = source.Orders.Count() + 1;
             }
 
             if (model.Id.HasValue)
