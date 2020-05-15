@@ -33,6 +33,7 @@
             this.CreateOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.RefreshOrderListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MailListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -42,7 +43,8 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 this.UpdateDataToolStripMenuItem,
                 this.CreateOrderToolStripMenuItem,
-                this.RefreshOrderListToolStripMenuItem
+                this.RefreshOrderListToolStripMenuItem,
+                this.MailListToolStripMenuItem
             });
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -70,6 +72,13 @@
             this.RefreshOrderListToolStripMenuItem.Size = new System.Drawing.Size(159, 20);
             this.RefreshOrderListToolStripMenuItem.Text = "Обновить список заказов";
             this.RefreshOrderListToolStripMenuItem.Click += new System.EventHandler(this.RefreshOrderListToolStripMenuItem_Click);
+            //
+            // MailListToolStripMenuItem
+            //
+            this.MailListToolStripMenuItem.Name = "MailListToolStripMenuItem";
+            this.MailListToolStripMenuItem.Size = new System.Drawing.Size(159, 20);
+            this.MailListToolStripMenuItem.Text = "Почта";
+            this.MailListToolStripMenuItem.Click += new System.EventHandler(this.MailListToolStripMenuItem_Click);
             //
             // dataGridView
             //
@@ -106,6 +115,7 @@
         private System.Windows.Forms.ToolStripMenuItem UpdateDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CreateOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RefreshOrderListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MailListToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView;
     }
 }

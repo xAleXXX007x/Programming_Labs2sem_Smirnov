@@ -30,6 +30,7 @@ namespace AircraftFactoryRestApi
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IAircraftLogic, AircraftLogic>();
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
             services.AddTransient<IStockLogic, StockLogic>();
             services.AddTransient<IPartLogic, PartLogic>();
             services.AddTransient<MainLogic>();

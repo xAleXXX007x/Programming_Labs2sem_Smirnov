@@ -30,6 +30,8 @@ namespace AircraftFactoryDatabaseImplement
 
         public virtual DbSet<Implementer> Implementers { set; get; }
 
+        public virtual DbSet<MessageInfo> MessageInfoes { set; get; }
+
         public virtual DbSet<Stock> Stocks { set; get; }
 
         public virtual DbSet<StockPart> StockParts { set; get; }

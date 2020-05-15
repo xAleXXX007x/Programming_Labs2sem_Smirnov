@@ -4,18 +4,20 @@ using AircraftFactoryDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AircraftFactoryDatabaseImplement.Migrations
 {
     [DbContext(typeof(AircraftFactoryDatabase))]
-    partial class AircraftFactoryDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20200514145854_MailUpdate")]
+    partial class MailUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -192,47 +194,6 @@ namespace AircraftFactoryDatabaseImplement.Migrations
                     b.ToTable("Parts");
                 });
 
-            modelBuilder.Entity("AircraftFactoryDatabaseImplement.Models.Stock", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("StockName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stocks");
-                });
-
-            modelBuilder.Entity("AircraftFactoryDatabaseImplement.Models.StockPart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PartId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StockId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PartId");
-
-                    b.HasIndex("StockId");
-
-                    b.ToTable("StockParts");
-                });
-
             modelBuilder.Entity("AircraftFactoryDatabaseImplement.Models.AircraftPart", b =>
                 {
                     b.HasOne("AircraftFactoryDatabaseImplement.Models.Aircraft", "Aircraft")
@@ -260,21 +221,6 @@ namespace AircraftFactoryDatabaseImplement.Migrations
                     b.HasOne("AircraftFactoryDatabaseImplement.Models.Aircraft", "Aircraft")
                         .WithMany("Orders")
                         .HasForeignKey("AircraftId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AircraftFactoryDatabaseImplement.Models.StockPart", b =>
-                {
-                    b.HasOne("AircraftFactoryDatabaseImplement.Models.Part", "Part")
-                        .WithMany("StockParts")
-                        .HasForeignKey("PartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AircraftFactoryDatabaseImplement.Models.Stock", "Stock")
-                        .WithMany("StockParts")
-                        .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

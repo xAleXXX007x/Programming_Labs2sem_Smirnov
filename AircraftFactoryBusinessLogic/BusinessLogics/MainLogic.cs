@@ -1,5 +1,7 @@
 ﻿using AircraftFactoryBusinessLogic.BindingModels;
+using AircraftFactoryBusinessLogic.BusinessLogics;
 using AircraftFactoryBusinessLogic.Enums;
+using AircraftFactoryBusinessLogic.HelperModels;
 using AircraftFactoryBusinessLogic.Interfaces;
 using AircraftFactoryBusinessLogic.ViewModels;
 using System;
@@ -14,15 +16,15 @@ namespace AircraftFactoryBusinessLogic
     {
         private readonly IOrderLogic orderLogic;
 
+        private readonly IClientLogic clientLogic;
+
         private readonly IStockLogic stockLogic;
 
-        private readonly IAircraftLogic aircraftLogic;
-
-        public MainLogic(IOrderLogic orderLogic, IStockLogic stockLogic, IAircraftLogic aircraftLogic)
+        public MainLogic(IOrderLogic orderLogic, IStockLogic stockLogic, IClientLogic clientLogic)
         {
             this.orderLogic = orderLogic;
+            this.clientLogic = clientLogic;
             this.stockLogic = stockLogic;
-            this.aircraftLogic = aircraftLogic;
         }
         public void CreateOrder(OrderBindingModel model)
         {
@@ -35,10 +37,19 @@ namespace AircraftFactoryBusinessLogic
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят
             });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = clientLogic.Read(new ClientBindingModel
+                {
+                    Id = model.ClientId
+                }).FirstOrDefault().Email,
+                Subject = $"Новый заказ",
+                Text = $"Заказ принят."
+            });
         }
 
         private readonly object locker = new object();
-
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
@@ -74,6 +85,16 @@ namespace AircraftFactoryBusinessLogic
                         DateCreate = order.DateCreate,
                         DateImplement = DateTime.Now,
                         Status = OrderStatus.Выполняется
+                    });
+
+                    MailLogic.MailSendAsync(new MailSendInfo
+                    {
+                        MailAddress = clientLogic.Read(new ClientBindingModel
+                        {
+                            Id = order.ClientId
+                        })?[0]?.Email,
+                        Subject = $"Заказ №{order.Id}",
+                        Text = $"Заказ №{order.Id} передан в работу."
                     });
                 } else
                 {
@@ -116,6 +137,17 @@ namespace AircraftFactoryBusinessLogic
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Готов
             });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = clientLogic.Read(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?[0]?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} готов."
+            });
+
         }
         public void PayOrder(ChangeStatusBindingModel model)
         {
@@ -140,6 +172,16 @@ namespace AircraftFactoryBusinessLogic
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен
+            });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = clientLogic.Read(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?[0]?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} оплачен."
             });
         }
     }

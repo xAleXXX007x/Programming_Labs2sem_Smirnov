@@ -166,6 +166,7 @@
     <Compile Include="Implements\AircraftLogic.cs" />
     <Compile Include="Implements\ClientLogic.cs" />
     <Compile Include="Implements\ImplementerLogic.cs" />
+    <Compile Include="Implements\MessageInfoLogic.cs" />
     <Compile Include="Implements\OrderLogic.cs" />
     <Compile Include="Implements\PartLogic.cs" />
     <Compile Include="Migrations\20200306042442_InitialCreate.cs" />
@@ -184,6 +185,10 @@
     <Compile Include="Migrations\20200424063501_ImplementerUpdate.designer.cs">
       <DependentUpon>20200424063501_ImplementerUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200514145854_MailUpdate.cs" />
+    <Compile Include="Migrations\20200514145854_MailUpdate.designer.cs">
+      <DependentUpon>20200514145854_MailUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AircraftFactoryDatabaseModelSnapshot.cs" />
     <Compile Include="Models\Stock.cs" />
     <Compile Include="Models\Aircraft.cs" />
@@ -191,6 +196,7 @@
     <Compile Include="Models\AircraftPart.cs" />
     <Compile Include="Models\Implementer.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\MessageInfo.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Part.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
