@@ -20,6 +20,8 @@ namespace AircraftFactoryListImplement
 
         public List<Implementer> Implementers { get; set; }
 
+        public List<MessageInfo> MessageInfoes { get; set; }
+
         public List<Stock> Stocks { get; set; }
 
         public List<StockPart> StockParts { get; set; }
@@ -32,6 +34,7 @@ namespace AircraftFactoryListImplement
             AircraftParts = new List<AircraftPart>();
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
+            MessageInfoes = new List<MessageInfo>();
             Stocks = new List<Stock>();
             StockParts = new List<StockPart>();
         }
