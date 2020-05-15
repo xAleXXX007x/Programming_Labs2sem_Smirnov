@@ -30,8 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.5\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.10.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.10.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit, Version=2.5.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.6.0\lib\net46\MailKit.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
@@ -41,6 +47,9 @@
     </Reference>
     <Reference Include="MigraDoc.RtfRendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=2.6.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.6.0\lib\net46\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
@@ -58,6 +67,7 @@
       <HintPath>..\packages\System.IO.Packaging.4.7.0\lib\net46\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,13 +83,18 @@
     <Compile Include="BindingModels\CreateOrderBindingModel.cs" />
     <Compile Include="BindingModels\ChangeStatusBindingModel.cs" />
     <Compile Include="BindingModels\ImplementerBindingModel.cs" />
+    <Compile Include="BindingModels\MessageInfoBindingModel.cs" />
     <Compile Include="BindingModels\OrderBindingModel.cs" />
     <Compile Include="BindingModels\PartBindingModel.cs" />
+    <Compile Include="BusinessLogics\MailLogic.cs" />
     <Compile Include="BusinessLogics\ReportLogic.cs" />
     <Compile Include="BusinessLogics\WorkModeling.cs" />
     <Compile Include="HelperModels\ExcelCellParameters.cs" />
     <Compile Include="HelperModels\ExcelInfo.cs" />
     <Compile Include="HelperModels\ExcelMergeParameters.cs" />
+    <Compile Include="HelperModels\MailCheckInfo.cs" />
+    <Compile Include="HelperModels\MailConfig.cs" />
+    <Compile Include="HelperModels\MailSendInfo.cs" />
     <Compile Include="HelperModels\PdfCellParameters.cs" />
     <Compile Include="HelperModels\PdfInfo.cs" />
     <Compile Include="HelperModels\PdfRowParameters.cs" />
@@ -91,8 +106,10 @@
     <Compile Include="BusinessLogics\SaveToWord.cs" />
     <Compile Include="Interfaces\IClientLogic.cs" />
     <Compile Include="Interfaces\IImplementerLogic.cs" />
+    <Compile Include="Interfaces\IMessageInfoLogic.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="ViewModels\ImplementerViewModel.cs" />
+    <Compile Include="ViewModels\MessageInfoViewModel.cs" />
     <Compile Include="ViewModels\ReportAircraftPartViewModel.cs" />
     <Compile Include="BindingModels\ReportBindingModel.cs" />
     <Compile Include="Enums\OrderStatus.cs" />

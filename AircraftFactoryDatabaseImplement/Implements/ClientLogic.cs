@@ -68,7 +68,7 @@ namespace AircraftFactoryDatabaseImplement.Implements
                 if (model != null)
                 {
                     result.AddRange(context.Clients
-                        .Where(rec => (rec.Email == model.Email && rec.Password == model.Password))
+                        .Where(rec => (rec.Email == model.Email && rec.Password == model.Password) || rec.Id == model.Id)
                         .Select(rec => CreateViewModel(rec)));
                 }
                 else

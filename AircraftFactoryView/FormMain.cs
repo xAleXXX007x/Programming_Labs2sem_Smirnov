@@ -143,5 +143,11 @@ namespace AircraftFactoryView
             var form = Container.Resolve<FormImplementers>();
             form.ShowDialog();
         }
+
+        private void почтаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormMail>();
+            form.ShowDialog();
+        }
     }
 }

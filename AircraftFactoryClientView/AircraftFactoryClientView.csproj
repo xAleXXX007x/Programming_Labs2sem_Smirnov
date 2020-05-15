@@ -12,6 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="FormMail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormMail.designer.cs">
+      <DependentUpon>FormMail.cs</DependentUpon>
+    </Compile>
     <Compile Update="FormRegister.cs">
       <SubType>Form</SubType>
     </Compile>

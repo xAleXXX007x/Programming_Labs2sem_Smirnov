@@ -50,5 +50,10 @@ namespace AircraftFactoryClientView
             LoadList();
         }
 
+        private void MailListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FormMail();
+            form.ShowDialog();
+        }
     }
 }
