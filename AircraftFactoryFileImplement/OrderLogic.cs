@@ -96,7 +96,7 @@ namespace AircraftFactoryFileImplement
         private OrderViewModel CreateViewModel(Order order)
         {
             Aircraft aircraft = source.Aircrafts.Where(rec => rec.Id == order.AircraftId).FirstOrDefault();
-            Implementer implementer = source.Implementers.Where(rec => rec.Id == model.AircraftId).FirstOrDefault();
+            Implementer implementer = source.Implementers.Where(rec => rec.Id == order.AircraftId).FirstOrDefault();
 
             if (aircraft == null || order.ImplementerId.HasValue && implementer == null)
             {
