@@ -37,5 +37,7 @@ namespace AircraftFactoryDatabaseImplement.Models
         public virtual Aircraft Aircraft { get; set; }
 
         public virtual Client Client { get; set; }
+
+        public virtual Implementer Implementer { get; set; }
     }
 }
