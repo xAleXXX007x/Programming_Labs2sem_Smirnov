@@ -21,7 +21,7 @@ namespace AircraftFactoryFileImplement
 
         private readonly string ClientFileName = "Client.xml";
 
-        private readonly string ImplementerFileName = "Client.xml";
+        private readonly string ImplementerFileName = "Implementer.xml";
 
         public List<Part> Parts { get; set; }
 
@@ -168,7 +168,7 @@ namespace AircraftFactoryFileImplement
             return list;
         }
 
-        private List<Client> LoadImplementers()
+        private List<Implementer> LoadImplementers()
         {
             var list = new List<Implementer>();
             if (File.Exists(ImplementerFileName))
