@@ -31,5 +31,7 @@ namespace AircraftFactoryDatabaseImplement.Models
         public DateTime? DateImplement { get; set; }
 
         public virtual Aircraft Aircraft { get; set; }
+
+        public virtual Client Client { get; set; }
     }
 }
