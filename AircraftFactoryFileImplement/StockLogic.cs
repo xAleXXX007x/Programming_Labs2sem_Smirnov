@@ -94,6 +94,11 @@ namespace AircraftFactoryFileImplement
             }
             element.StockName = model.StockName;
 
+            UpdateStockParts(model);
+        }
+
+        private void UpdateStockParts(StockBindingModel model)
+        {
             int maxSPId = source.StockParts.Count > 0 ? source.StockParts.Max(rec => rec.Id) : 0;
             foreach (var part in model.StockParts)
             {
@@ -104,11 +109,13 @@ namespace AircraftFactoryFileImplement
                     if (part.Count <= 0)
                     {
                         source.StockParts.Remove(stockPart);
-                    } else
+                    }
+                    else
                     {
                         stockPart.Count = part.Count;
                     }
-                } else
+                }
+                else
                 {
                     if (part.Count > 0)
                     {
@@ -135,6 +142,131 @@ namespace AircraftFactoryFileImplement
             else
             {
                 throw new Exception("Элемент не найден");
+            }
+        }
+
+        public void RefillStock(StockBindingModel model, StockPartBindingModel partModel)
+        {
+            var stock = GetElement(model.Id);
+            if (stock == null)
+            {
+                throw new Exception("Не найден склад");
+            }
+
+            List<StockPartBindingModel> stockParts = model.StockParts;
+            bool found = false;
+            foreach (StockPartBindingModel stockPart in stockParts)
+            {
+                if (stockPart.PartId == partModel.PartId)
+                {
+                    stockPart.Count += partModel.Count;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                stockParts.Add(partModel);
+            }
+
+            UpdElement(new StockBindingModel
+            {
+                Id = stock.Id,
+                StockName = stock.StockName,
+                StockParts = stockParts
+            });
+        }
+
+        public void WithdrawStock(OrderViewModel order)
+        {
+            var aircraftParts = source.AircraftParts.Where(rec => rec.AircraftId == order.AircraftId);
+            var stocks = GetList();
+
+            foreach (var part in aircraftParts)
+            {
+                int count = 0;
+
+                foreach (var stock in stocks)
+                {
+                    foreach (var stockPart in stock.StockParts)
+                    {
+                        if (stockPart.PartId.Equals(part.PartId))
+                        {
+                            count += stockPart.Count;
+                        }
+                    }
+                }
+
+                if (count < part.Count * order.Count)
+                {
+                    throw new Exception("Недостаточно запчастей для выполнения заказа");
+                }
+                else
+                {
+                    int partsLeft = part.Count * order.Count;
+
+                    foreach (var stock in stocks)
+                    {
+                        List<StockPartViewModel> delete = new List<StockPartViewModel>();
+
+                        foreach (var stockPart in stock.StockParts)
+                        {
+                            if (partsLeft > 0)
+                            {
+                                if (stockPart.PartId.Equals(part.PartId))
+                                {
+                                    if (stockPart.Count <= partsLeft)
+                                    {
+                                        partsLeft -= stockPart.Count;
+
+                                        stockPart.Count = 0;
+
+                                        if (partsLeft == 0)
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        stockPart.Count -= partsLeft;
+                                        partsLeft = 0;
+
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (partsLeft == 0)
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            foreach (var stock in stocks)
+            {
+                List<StockPartBindingModel> parts = new List<StockPartBindingModel>();
+
+                foreach (var part in stock.StockParts)
+                {
+                    parts.Add(new StockPartBindingModel
+                    {
+                        Id = part.Id,
+                        StockId = part.StockId,
+                        PartId = part.PartId,
+                        Count = part.Count
+                    });
+                }
+
+                UpdElement(new StockBindingModel
+                {
+                    Id = stock.Id,
+                    StockName = stock.StockName,
+                    StockParts = parts
+                });
             }
         }
     }

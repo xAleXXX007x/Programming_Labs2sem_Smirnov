@@ -24,14 +24,11 @@ namespace AircraftFactoryView
 
         private readonly IStockLogic stockLogic;
 
-        private readonly MainLogic mainLogic;
-
-        public FormStockPart(IPartLogic logic, IStockLogic stockLogic, MainLogic mainLogic)
+        public FormStockPart(IPartLogic logic, IStockLogic stockLogic)
         {
             InitializeComponent();
             this.logic = logic;
             this.stockLogic = stockLogic;
-            this.mainLogic = mainLogic;
         }
 
         private void FormStockPart_Load(object sender, EventArgs e)
@@ -110,7 +107,7 @@ namespace AircraftFactoryView
                     }
                 }
 
-                mainLogic.RefillStock(new StockBindingModel
+                stockLogic.RefillStock(new StockBindingModel
                 {
                     Id = stock.Id,
                     StockName = stock.StockName,

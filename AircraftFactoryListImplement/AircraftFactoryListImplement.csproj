@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
+    <Compile Include="StockLogic.cs" />
     <Compile Include="AircraftLogic.cs" />
     <Compile Include="AircraftPart.cs" />
     <Compile Include="DataListSingleton.cs" />
@@ -49,6 +50,8 @@
     <Compile Include="Part.cs" />
     <Compile Include="PartLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stock.cs" />
+    <Compile Include="StockPart.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AircraftFactoryBusinessLogic\AircraftFactoryBusinessLogic.csproj">

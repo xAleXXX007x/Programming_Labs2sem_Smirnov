@@ -17,5 +17,9 @@ namespace AircraftFactoryBusinessLogic.Interfaces
         void UpdElement(StockBindingModel model);
 
         void DelElement(int id);
+
+        void RefillStock(StockBindingModel model, StockPartBindingModel partModel);
+
+        void WithdrawStock(OrderViewModel order);
     }
 }
