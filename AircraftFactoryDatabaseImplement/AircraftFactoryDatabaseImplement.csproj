@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AircraftFactoryDatabase.cs" />
+    <Compile Include="Implements\StockLogic.cs" />
     <Compile Include="Implements\AircraftLogic.cs" />
     <Compile Include="Implements\OrderLogic.cs" />
     <Compile Include="Implements\PartLogic.cs" />
@@ -145,7 +146,9 @@
       <DependentUpon>20200306042442_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AircraftFactoryDatabaseModelSnapshot.cs" />
+    <Compile Include="Models\Stock.cs" />
     <Compile Include="Models\Aircraft.cs" />
+    <Compile Include="Models\StockPart.cs" />
     <Compile Include="Models\AircraftPart.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Part.cs" />
