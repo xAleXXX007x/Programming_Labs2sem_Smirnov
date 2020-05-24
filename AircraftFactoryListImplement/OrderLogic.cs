@@ -67,7 +67,10 @@ namespace AircraftFactoryListImplement
             {
                 if (model != null)
                 {
-                    if (order.Id == model.Id)
+                    if ((model.Id.HasValue && order.Id == model.Id) ||
+                        (model.DateFrom.HasValue && model.DateTo.HasValue &&
+                        order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo) ||
+                        (order.ClientId == model.ClientId))
                     {
                         result.Add(CreateViewModel(order));
                         break;

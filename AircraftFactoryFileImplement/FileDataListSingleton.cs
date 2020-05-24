@@ -186,9 +186,9 @@ namespace AircraftFactoryFileImplement
                     list.Add(new Implementer
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
-                        ImplementerFIO = elem.Element("ClientFIO").Value,
-                        WorkingTime = Convert.ToInt32(elem.Element("Email").Value),
-                        PauseTime = Convert.ToInt32(elem.Element("Password").Value)
+                        ImplementerFIO = elem.Element("ImplementerFIO").Value,
+                        WorkingTime = Convert.ToInt32(elem.Element("WorkingTime").Value),
+                        PauseTime = Convert.ToInt32(elem.Element("PauseTime").Value)
                     });
                 }
             }
