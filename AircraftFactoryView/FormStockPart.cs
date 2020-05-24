@@ -82,42 +82,15 @@ namespace AircraftFactoryView
             }
             try
             {
-                StockViewModel stock = stockLogic.GetElement((int)comboBoxStocks.SelectedValue);
-                List<StockPartViewModel> stockParts = stock.StockParts;
-                List<StockPartBindingModel> stockPartBM = new List<StockPartBindingModel>();
-
-                for (int i = 0; i < stockParts.Count; ++i)
-                {
-                    stockPartBM.Add(new StockPartBindingModel
-                    {
-                        Id = stockParts[i].Id,
-                        StockId = stockParts[i].StockId,
-                        PartId = stockParts[i].PartId,
-                        Count = stockParts[i].Count
-                    });
-                }
-
-                int maxId = -1;
-
-                foreach (PartViewModel part in logic.GetList())
-                {
-                    if (part.Id > maxId)
-                    {
-                        maxId = part.Id;
-                    }
-                }
-
+                int stockId = (int)comboBoxStocks.SelectedValue;
                 stockLogic.RefillStock(new StockBindingModel
                 {
-                    Id = stock.Id,
-                    StockName = stock.StockName,
-                    StockParts = stockPartBM
+                    Id = stockId
                 }, new StockPartBindingModel
                 {
-                    Id = ++maxId,
                     PartId = Convert.ToInt32(comboBoxPart.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
-                    StockId = stock.Id
+                    StockId = stockId
                 });
 
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);

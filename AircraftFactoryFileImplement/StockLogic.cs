@@ -93,42 +93,6 @@ namespace AircraftFactoryFileImplement
                 throw new Exception("Элемент не найден");
             }
             element.StockName = model.StockName;
-
-            UpdateStockParts(model);
-        }
-
-        private void UpdateStockParts(StockBindingModel model)
-        {
-            int maxSPId = source.StockParts.Count > 0 ? source.StockParts.Max(rec => rec.Id) : 0;
-            foreach (var part in model.StockParts)
-            {
-                var stockPart = source.StockParts.FirstOrDefault(rec => rec.StockId == model.Id && rec.PartId == part.PartId);
-
-                if (stockPart != null)
-                {
-                    if (part.Count <= 0)
-                    {
-                        source.StockParts.Remove(stockPart);
-                    }
-                    else
-                    {
-                        stockPart.Count = part.Count;
-                    }
-                }
-                else
-                {
-                    if (part.Count > 0)
-                    {
-                        source.StockParts.Add(new StockPart
-                        {
-                            Id = ++maxSPId,
-                            StockId = model.Id,
-                            PartId = part.PartId,
-                            Count = part.Count
-                        });
-                    }
-                }
-            }
         }
 
         public void DelElement(int id)
@@ -153,120 +117,74 @@ namespace AircraftFactoryFileImplement
                 throw new Exception("Не найден склад");
             }
 
-            List<StockPartBindingModel> stockParts = model.StockParts;
-            bool found = false;
-            foreach (StockPartBindingModel stockPart in stockParts)
+            foreach (var stockPart in stock.StockParts)
             {
-                if (stockPart.PartId == partModel.PartId)
+                if (stockPart.PartId.Equals(partModel.PartId))
                 {
-                    stockPart.Count += partModel.Count;
-                    found = true;
-                    break;
+                    var part = source.StockParts.FirstOrDefault(rec => rec.Id == stockPart.Id);
+
+                    if (part != null)
+                    {
+                        part.Count += partModel.Count;
+                        return;
+                    }
                 }
             }
 
-            if (!found)
-            {
-                stockParts.Add(partModel);
-            }
+            int maxSPId = source.StockParts.Count > 0 ? source.StockParts.Max(rec => rec.Id) : 0;
 
-            UpdElement(new StockBindingModel
+            source.StockParts.Add(new StockPart
             {
-                Id = stock.Id,
-                StockName = stock.StockName,
-                StockParts = stockParts
+                Id = maxSPId,
+                StockId = model.Id,
+                PartId = partModel.PartId,
+                Count = partModel.Count
             });
         }
 
         public void WithdrawStock(OrderViewModel order)
         {
-            var aircraftParts = source.AircraftParts.Where(rec => rec.AircraftId == order.AircraftId);
-            var stocks = GetList();
-
-            foreach (var part in aircraftParts)
-            {
-                int count = 0;
-
-                foreach (var stock in stocks)
+            var aircraftParts = 
+                source.AircraftParts
+                .Where(rec => rec.AircraftId == order.AircraftId)
+                .ToDictionary(rec => rec.PartId, rec => rec.Count * order.Count);
+            var stockParts = 
+                source.StockParts
+                .Where(rec => aircraftParts.ContainsKey(rec.PartId))
+                .GroupBy(rec => rec.PartId)
+                .Select(rec => new
                 {
-                    foreach (var stockPart in stock.StockParts)
-                    {
-                        if (stockPart.PartId.Equals(part.PartId))
-                        {
-                            count += stockPart.Count;
-                        }
-                    }
-                }
+                    PartId = rec.Key,
+                    Count = rec.Sum(r => r.Count)
+                });
 
-                if (count < part.Count * order.Count)
+            foreach(var stockPart in stockParts)
+            {
+                if (aircraftParts[stockPart.PartId] > stockPart.Count)
                 {
                     throw new Exception("Недостаточно запчастей для выполнения заказа");
                 }
-                else
-                {
-                    int partsLeft = part.Count * order.Count;
-
-                    foreach (var stock in stocks)
-                    {
-                        List<StockPartViewModel> delete = new List<StockPartViewModel>();
-
-                        foreach (var stockPart in stock.StockParts)
-                        {
-                            if (partsLeft > 0)
-                            {
-                                if (stockPart.PartId.Equals(part.PartId))
-                                {
-                                    if (stockPart.Count <= partsLeft)
-                                    {
-                                        partsLeft -= stockPart.Count;
-
-                                        stockPart.Count = 0;
-
-                                        if (partsLeft == 0)
-                                        {
-                                            continue;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        stockPart.Count -= partsLeft;
-                                        partsLeft = 0;
-
-                                        continue;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (partsLeft == 0)
-                        {
-                            continue;
-                        }
-                    }
-                }
             }
 
-            foreach (var stock in stocks)
+            foreach (var aircraftPart in aircraftParts)
             {
-                List<StockPartBindingModel> parts = new List<StockPartBindingModel>();
+                int partsLeft = aircraftPart.Value;
+                var stockPartList = source.StockParts.Where(rec => rec.PartId == aircraftPart.Key).ToList();
 
-                foreach (var part in stock.StockParts)
+                foreach (var stockPart in stockPartList)
                 {
-                    parts.Add(new StockPartBindingModel
+                    if (stockPart.Count > partsLeft)
                     {
-                        Id = part.Id,
-                        StockId = part.StockId,
-                        PartId = part.PartId,
-                        Count = part.Count
-                    });
-                }
+                        stockPart.Count -= partsLeft;
+                        partsLeft = 0;
 
-                UpdElement(new StockBindingModel
-                {
-                    Id = stock.Id,
-                    StockName = stock.StockName,
-                    StockParts = parts
-                });
+                        break;
+                    } else
+                    {
+                        partsLeft -= stockPart.Count;
+                        source.StockParts.Remove(stockPart);
+                    }
+                }
             }
         }
     }
