@@ -15,5 +15,8 @@ namespace AircraftFactoryDatabaseImplement.Models
 
         [ForeignKey("PartId")]
         public virtual List<AircraftPart> AircraftParts { get; set; }
+
+        [ForeignKey("PartId")]
+        public virtual List<StockPart> StockParts { get; set; }
     }
 }

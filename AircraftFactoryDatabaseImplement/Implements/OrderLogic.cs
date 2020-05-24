@@ -71,7 +71,7 @@ namespace AircraftFactoryDatabaseImplement.Implements
                 }
                 else
                 {
-                    result.AddRange(context.Orders.Select(rec => CreateViewModel(rec)));
+                    result.AddRange(context.Orders.Include(rec => rec.Aircraft).Select(rec => CreateViewModel(rec)));
                 }
                 return result;
             }

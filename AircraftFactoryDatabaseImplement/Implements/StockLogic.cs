@@ -74,7 +74,7 @@ namespace AircraftFactoryDatabaseImplement.Implements
                         Stock element = context.Stocks.FirstOrDefault(rec => rec.StockName == model.StockName);
                         if (element != null)
                         {
-                            throw new Exception("Уже есть самолет с таким названием");
+                            throw new Exception("Уже есть склад с таким названием");
                         }
                         element = new Stock
                         {
@@ -83,24 +83,6 @@ namespace AircraftFactoryDatabaseImplement.Implements
                         context.Stocks.Add(element);
                         context.SaveChanges();
 
-                        var groupParts = model.StockParts
-                        .GroupBy(rec => rec.PartId)
-                        .Select(rec => new
-                        {
-                            PartId = rec.Key,
-                            Count = rec.Sum(r => r.Count)
-                        });
-
-                        foreach (var groupPart in groupParts)
-                        {
-                            context.StockParts.Add(new StockPart
-                            {
-                                StockId = element.Id,
-                                PartId = groupPart.PartId,
-                                Count = groupPart.Count
-                            });
-                            context.SaveChanges();
-                        }
                         transaction.Commit();
                     }
                     catch (Exception)
@@ -131,52 +113,6 @@ namespace AircraftFactoryDatabaseImplement.Implements
                         }
                         element.StockName = model.StockName;
                         context.SaveChanges();
-                        var compIds = model.StockParts.Select(rec =>
-                        rec.PartId).Distinct();
-                        var updateParts = context.StockParts.Where(rec => rec.StockId == model.Id && compIds.Contains(rec.PartId));
-                        foreach (var updatePart in updateParts)
-                        {
-                            updatePart.Count = model.StockParts.FirstOrDefault(rec => rec.Id == updatePart.Id).Count;
-                        }
-                        context.SaveChanges();
-                        context.StockParts.RemoveRange(context.StockParts.Where(rec =>
-                        rec.StockId == model.Id && !compIds.Contains(rec.PartId)));
-                        context.SaveChanges();
-
-                        var groupParts = model.StockParts
-                        .Where(rec => rec.Id == 0)
-                        .GroupBy(rec => rec.PartId)
-                        .Select(rec => new
-                        {
-                            PartId = rec.Key,
-                            Count = rec.Sum(r => r.Count)
-                        });
-                        foreach (var groupPart in groupParts)
-                        {
-                            StockPart elementAP = context.StockParts.FirstOrDefault(rec => rec.StockId == model.Id
-                            && rec.PartId == groupPart.PartId);
-                            if (elementAP != null)
-                            {
-                                if (groupPart.Count <= 0)
-                                {
-                                    context.StockParts.Remove(elementAP);
-                                } else
-                                {
-                                    elementAP.Count += groupPart.Count;
-                                }
-                                context.SaveChanges();
-                            }
-                            else
-                            {
-                                context.StockParts.Add(new StockPart
-                                {
-                                    StockId = model.Id,
-                                    PartId = groupPart.PartId,
-                                    Count = groupPart.Count
-                                });
-                                context.SaveChanges();
-                            }
-                        }
                         transaction.Commit();
                     }
                     catch (Exception)
@@ -231,29 +167,28 @@ namespace AircraftFactoryDatabaseImplement.Implements
                             throw new Exception("Не найден склад");
                         }
 
-                        List<StockPartBindingModel> stockParts = model.StockParts;
-                        bool found = false;
-                        foreach (StockPartBindingModel stockPart in stockParts)
+                        foreach (var stockPart in stock.StockParts)
                         {
-                            if (stockPart.PartId == partModel.PartId)
+                            if (stockPart.PartId.Equals(partModel.PartId))
                             {
-                                stockPart.Count += partModel.Count;
-                                found = true;
-                                break;
+                                var part = context.StockParts.FirstOrDefault(rec => rec.Id == stockPart.Id);
+
+                                if (part != null)
+                                {
+                                    part.Count += partModel.Count;
+                                    context.SaveChanges();
+                                    return;
+                                }
                             }
                         }
 
-                        if (!found)
+                        context.StockParts.Add(new StockPart
                         {
-                            stockParts.Add(partModel);
-                        }
-
-                        UpdElement(new StockBindingModel
-                        {
-                            Id = stock.Id,
-                            StockName = stock.StockName,
-                            StockParts = stockParts
+                            StockId = model.Id,
+                            PartId = partModel.PartId,
+                            Count = partModel.Count
                         });
+                        context.SaveChanges();
                         transaction.Commit();
                     }
                     catch (Exception)
@@ -273,61 +208,31 @@ namespace AircraftFactoryDatabaseImplement.Implements
                 {
                     try
                     {
-                        var aircraftParts = context.AircraftParts.Where(rec => rec.AircraftId == order.AircraftId);
-                        var stocks = GetList();
+                        var aircraftParts =
+                            context.AircraftParts
+                            .Where(rec => rec.AircraftId == order.AircraftId)
+                            .ToDictionary(rec => rec.PartId, rec => rec.Count * order.Count);
 
-                        foreach (var part in aircraftParts)
+                        foreach (var aircraftPart in aircraftParts)
                         {
-                            int count = 0;
+                            int partsLeft = aircraftPart.Value;
+                            var stockPartList = context.StockParts.Where(rec => rec.PartId == aircraftPart.Key).ToList();
 
-                            foreach (var stock in stocks)
+                            foreach (var stockPart in stockPartList)
                             {
-                                foreach (var stockPart in stock.StockParts)
+                                if (stockPart.Count > partsLeft)
                                 {
-                                    if (stockPart.PartId.Equals(part.PartId))
-                                    {
-                                        count += stockPart.Count;
-                                    }
+                                    stockPart.Count -= partsLeft;
+                                    partsLeft = 0;
+                                    context.SaveChanges();
+
+                                    break;
                                 }
-                            }
-
-                            int partsLeft = part.Count * order.Count;
-
-                            foreach (var stock in stocks)
-                            {
-                                List<StockPartViewModel> delete = new List<StockPartViewModel>();
-
-                                foreach (var stockPart in stock.StockParts)
+                                else
                                 {
-                                    if (partsLeft > 0)
-                                    {
-                                        if (stockPart.PartId.Equals(part.PartId))
-                                        {
-                                            if (stockPart.Count <= partsLeft)
-                                            {
-                                                partsLeft -= stockPart.Count;
-
-                                                stockPart.Count = 0;
-
-                                                if (partsLeft == 0)
-                                                {
-                                                    continue;
-                                                }
-                                            }
-                                            else
-                                            {
-                                                stockPart.Count -= partsLeft;
-                                                partsLeft = 0;
-
-                                                continue;
-                                            }
-                                        }
-                                    }
-                                }
-
-                                if (partsLeft == 0)
-                                {
-                                    continue;
+                                    partsLeft -= stockPart.Count;
+                                    context.StockParts.Remove(stockPart);
+                                    context.SaveChanges();
                                 }
                             }
 
@@ -335,29 +240,6 @@ namespace AircraftFactoryDatabaseImplement.Implements
                             {
                                 throw new Exception("Недостаточно запчастей для выполнения заказа");
                             }
-                        }
-
-                        foreach (var stock in stocks)
-                        {
-                            List<StockPartBindingModel> parts = new List<StockPartBindingModel>();
-
-                            foreach (var part in stock.StockParts)
-                            {
-                                parts.Add(new StockPartBindingModel
-                                {
-                                    Id = part.Id,
-                                    StockId = part.StockId,
-                                    PartId = part.PartId,
-                                    Count = part.Count
-                                });
-                            }
-
-                            UpdElement(new StockBindingModel
-                            {
-                                Id = stock.Id,
-                                StockName = stock.StockName,
-                                StockParts = parts
-                            });
                         }
                         transaction.Commit();
                     }
