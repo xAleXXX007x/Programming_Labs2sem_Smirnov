@@ -30,27 +30,73 @@ namespace AircraftFactoryBusinessLogic
                     }
                 }));
 
-                foreach (var aircraft in info.Aircrafts)
+                if (info.Aircrafts != null)
                 {
-                    Paragraph paragraph = new Paragraph();
-                    Run run = new Run();
-                    RunProperties runProperties = new RunProperties();
-                    runProperties.AppendChild(new Bold());
-                    run.AppendChild(runProperties);
-                    run.AppendChild(new Text
+                    foreach (var aircraft in info.Aircrafts)
                     {
-                        Text = aircraft.AircraftName
-                    }); 
-                    paragraph.AppendChild(run);
-                    run = new Run();
-                    runProperties = new RunProperties();
-                    run.AppendChild(runProperties);
-                    run.AppendChild(new Text
+                        Paragraph paragraph = new Paragraph();
+                        Run run = new Run();
+                        RunProperties runProperties = new RunProperties();
+                        runProperties.AppendChild(new Bold());
+                        run.AppendChild(runProperties);
+                        run.AppendChild(new Text
+                        {
+                            Text = aircraft.AircraftName
+                        });
+                        paragraph.AppendChild(run);
+                        run = new Run();
+                        runProperties = new RunProperties();
+                        run.AppendChild(runProperties);
+                        run.AppendChild(new Text
+                        {
+                            Text = "; Цена: " + aircraft.Price.ToString()
+                        });
+                        paragraph.AppendChild(run);
+                        docBody.AppendChild(paragraph);
+                    }
+                } else
+                {
+                    int i = 1;
+
+                    Table table = new Table();
+
+                    TableProperties tblProp = new TableProperties(
+                        new TableBorders(
+                            new TopBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 8 },
+                            new BottomBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 8 },
+                            new LeftBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 8 },
+                            new RightBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 8 },
+                            new InsideHorizontalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 8 },
+                            new InsideVerticalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 8 }
+                        )
+                    );
+
+                    table.AppendChild<TableProperties>(tblProp);
+
+                    TableRow headerRow = new TableRow();
+                    TableCell headerNumberCell = new TableCell(new Paragraph(new Run(new Text("№"))));
+                    TableCell headerNameCell = new TableCell(new Paragraph(new Run(new Text("Название"))));
+
+                    headerRow.Append(headerNumberCell);
+                    headerRow.Append(headerNameCell);
+
+                    table.Append(headerRow);
+
+                    foreach (var stock in info.Stocks)
                     {
-                        Text = "; Цена: " + aircraft.Price.ToString()
-                    });
-                    paragraph.AppendChild(run);
-                    docBody.AppendChild(paragraph);
+                        TableRow stockRow = new TableRow();
+                        TableCell numberCell = new TableCell(new Paragraph(new Run(new Text(i.ToString()))));
+                        TableCell nameCell = new TableCell(new Paragraph(new Run(new Text(stock.StockName))));
+
+                        stockRow.Append(numberCell);
+                        stockRow.Append(nameCell);
+
+                        table.Append(stockRow);
+
+                        i++;
+                    }
+
+                    docBody.AppendChild(table);
                 }
 
                 docBody.AppendChild(CreateSectionProperties());

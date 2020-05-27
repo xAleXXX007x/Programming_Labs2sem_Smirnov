@@ -85,7 +85,7 @@
     <Compile Include="BusinessLogics\SaveToExcel.cs" />
     <Compile Include="BusinessLogics\SaveToPdf.cs" />
     <Compile Include="BusinessLogics\SaveToWord.cs" />
-    <Compile Include="ViewModels\ReportAircraftPartViewModel.cs" />
+    <Compile Include="ViewModels\ReportStockPartViewModel.cs" />
     <Compile Include="BindingModels\ReportBindingModel.cs" />
     <Compile Include="BindingModels\StockBindingModel.cs" />
     <Compile Include="BindingModels\StockPartBindingModel.cs" />

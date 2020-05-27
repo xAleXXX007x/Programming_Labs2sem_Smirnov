@@ -239,11 +239,23 @@
     <Compile Include="FormAircrafts.designer.cs">
       <DependentUpon>FormAircrafts.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportStockPartsPdf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportStockPartsPdf.Designer.cs">
+      <DependentUpon>FormReportStockPartsPdf.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReportAircrafts.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormReportAircrafts.Designer.cs">
       <DependentUpon>FormReportAircrafts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportStockParts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportStockParts.Designer.cs">
+      <DependentUpon>FormReportStockParts.cs</DependentUpon>
     </Compile>
     <Compile Include="FormReportDayOrders.cs">
       <SubType>Form</SubType>
@@ -293,12 +305,6 @@
     <Compile Include="FormStocks.designer.cs">
       <DependentUpon>FormStocks.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormReportAircraftParts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormReportAircraftParts.Designer.cs">
-      <DependentUpon>FormReportAircraftParts.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
@@ -311,14 +317,17 @@
     <EmbeddedResource Include="FormAircrafts.resx">
       <DependentUpon>FormAircrafts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReportStockPartsPdf.resx">
+      <DependentUpon>FormReportStockPartsPdf.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormReportAircrafts.resx">
       <DependentUpon>FormReportAircrafts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReportStockParts.resx">
+      <DependentUpon>FormReportStockParts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormReportDayOrders.resx">
       <DependentUpon>FormReportDayOrders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormReportOrders.resx">
-      <DependentUpon>FormReportOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
@@ -341,9 +350,6 @@
     <EmbeddedResource Include="FormStocks.resx">
       <DependentUpon>FormStocks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormReportAircraftParts.resx">
-      <DependentUpon>FormReportAircraftParts.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -354,9 +360,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="ReportAircrafts.rdlc" />
-    <EmbeddedResource Include="ReportOrders.rdlc" />
+    <EmbeddedResource Include="ReportStockParts.rdlc" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\AircraftFactoryBusinessLogic.ViewModels.ReportAircraftsViewModel.datasource" />
+    <None Include="Properties\DataSources\AircraftFactoryBusinessLogic.ViewModels.ReportStockPartViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

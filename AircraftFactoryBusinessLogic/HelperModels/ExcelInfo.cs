@@ -14,5 +14,7 @@ namespace AircraftFactoryBusinessLogic.HelperModels
         public string Title { get; set; }
 
         public List<IGrouping<DateTime, OrderViewModel>> Orders { get; set; }
+
+        public List<StockViewModel> Stocks { get; set; }
     }
 }

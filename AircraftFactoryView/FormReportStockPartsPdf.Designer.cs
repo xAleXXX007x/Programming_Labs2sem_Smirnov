@@ -1,6 +1,6 @@
 ﻿namespace AircraftFactoryView
 {
-    partial class FormReportAircrafts
+    partial class FormReportStockPartsPdf
     {
         /// <summary>
         /// Required designer variable.
@@ -29,15 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.reportAircraftsViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.reportViewerAircrafts = new Microsoft.Reporting.WinForms.ReportViewer();
-            ((System.ComponentModel.ISupportInitialize)(this.reportAircraftsViewModelBindingSource)).BeginInit();
+            this.reportViewerStockParts = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
-            // 
-            // reportAircraftsViewModelBindingSource
-            // 
-            this.reportAircraftsViewModelBindingSource.DataSource = typeof(AircraftFactoryBusinessLogic.ViewModels.ReportAircraftsViewModel);
             // 
             // buttonSave
             // 
@@ -49,26 +44,27 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // reportViewerAircrafts
+            // reportViewerStockParts
             // 
-            this.reportViewerAircrafts.LocalReport.ReportEmbeddedResource = "AircraftFactoryView.ReportAircrafts.rdlc";
-            this.reportViewerAircrafts.Location = new System.Drawing.Point(12, 41);
-            this.reportViewerAircrafts.Name = "reportViewerAircrafts";
-            this.reportViewerAircrafts.ServerReport.BearerToken = null;
-            this.reportViewerAircrafts.Size = new System.Drawing.Size(693, 397);
-            this.reportViewerAircrafts.TabIndex = 1;
+            reportDataSource1.Name = "DataSetStockParts";
+            this.reportViewerStockParts.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewerStockParts.LocalReport.ReportEmbeddedResource = "AircraftFactoryView.ReportStockParts.rdlc";
+            this.reportViewerStockParts.Location = new System.Drawing.Point(12, 41);
+            this.reportViewerStockParts.Name = "reportViewerStockParts";
+            this.reportViewerStockParts.ServerReport.BearerToken = null;
+            this.reportViewerStockParts.Size = new System.Drawing.Size(693, 397);
+            this.reportViewerStockParts.TabIndex = 1;
             // 
-            // FormReportAircrafts
+            // FormReportStockPartsPdf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 450);
-            this.Controls.Add(this.reportViewerAircrafts);
+            this.Controls.Add(this.reportViewerStockParts);
             this.Controls.Add(this.buttonSave);
-            this.Name = "FormReportAircrafts";
-            this.Text = "Список самолётов и их запчастей";
+            this.Name = "FormReportStockPartsPdf";
+            this.Text = "Список запчастей на складах";
             this.Load += new System.EventHandler(this.FormReportAircrafts_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.reportAircraftsViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -76,7 +72,6 @@
         #endregion
 
         private System.Windows.Forms.Button buttonSave;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewerAircrafts;
-        private System.Windows.Forms.BindingSource reportAircraftsViewModelBindingSource;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewerStockParts;
     }
 }

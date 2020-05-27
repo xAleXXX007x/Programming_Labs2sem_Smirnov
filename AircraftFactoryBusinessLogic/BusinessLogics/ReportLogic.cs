@@ -13,56 +13,14 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
 {
     public class ReportLogic
     {
-        private readonly IPartLogic partLogic;
         private readonly IAircraftLogic aircraftLogic;
         private readonly IOrderLogic orderLogic;
-        public ReportLogic(IAircraftLogic aircraftLogic, IPartLogic partLogic, IOrderLogic orderLLogic)
+        private readonly IStockLogic stockLogic;
+        public ReportLogic(IAircraftLogic aircraftLogic, IOrderLogic orderLogic, IStockLogic stockLogic)
         {
             this.aircraftLogic = aircraftLogic;
-            this.partLogic = partLogic;
-            this.orderLogic = orderLLogic;
-        }
-
-        public List<ReportAircraftPartViewModel> GetAircraftPart()
-        {
-            var parts = partLogic.GetList();
-            var aircrafts = aircraftLogic.GetList();
-            var list = new List<ReportAircraftPartViewModel>();
-            foreach (var part in parts)
-            {
-                var record = new ReportAircraftPartViewModel
-                {
-                    PartName = part.PartName,
-                    Aircrafts = new List<Tuple<string, int>>(),
-                    TotalCount = 0
-                };
-                foreach (var aircraft in aircrafts)
-                {
-                    bool contains = false;
-                    int id = -1;
-
-                    for (int i = 0; i < aircraft.AircraftParts.Count; i++)
-                    {
-                        var ap = aircraft.AircraftParts[i];
-
-                        if (ap.PartId.Equals(part.Id))
-                        {
-                            contains = true;
-                            id = i;
-                            break;
-                        }
-                    }
-
-                    if (contains)
-                    {
-                        var p = aircraft.AircraftParts[id];
-                        record.Aircrafts.Add(new Tuple<string, int>(aircraft.AircraftName, p.Count));
-                        record.TotalCount += p.Count;
-                    }
-                }
-                list.Add(record);
-            }
-            return list;
+            this.orderLogic = orderLogic;
+            this.stockLogic = stockLogic;
         }
 
         public List<IGrouping<DateTime, OrderViewModel>> GetOrders(ReportBindingModel model)
@@ -100,6 +58,29 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
             return list;
         }
 
+        public List<ReportStockPartViewModel> GetStockParts()
+        {
+            var list = new List<ReportStockPartViewModel>();
+            var stocks = stockLogic.GetList();
+
+            foreach (var stock in stocks)
+            {
+                foreach (var part in stock.StockParts)
+                {
+                    var stockPartRecord = new ReportStockPartViewModel
+                    {
+                        StockName = stock.StockName,
+                        PartName = part.PartName,
+                        Count = part.Count
+                    };
+
+                    list.Add(stockPartRecord);
+                }
+            }
+
+            return list;
+        }
+
         public void SaveAircraftsToWordFile(ReportBindingModel model)
         {
             SaveToWord.CreateDoc(new WordInfo
@@ -107,6 +88,16 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
                 FileName = model.FileName,
                 Title = "Список самолётов",
                 Aircrafts = aircraftLogic.GetList()
+            });
+        }
+
+        public void SaveStocksToWordFile(ReportBindingModel model)
+        {
+            SaveToWord.CreateDoc(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                Stocks = stockLogic.GetList()
             });
         }
 
@@ -120,6 +111,16 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
             });
         }
 
+        public void SaveStockPartsToExcel(ReportBindingModel model)
+        {
+            SaveToExcel.CreateDoc(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Список заказов",
+                Stocks = stockLogic.GetList()
+            });
+        }
+
         public void SaveAircraftsToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo
@@ -130,5 +131,14 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
             });
         }
 
+        public void SaveStockPartsToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDoc(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Список запчастей на складах",
+                StockParts = GetStockParts()
+            });
+        }
     }
 }
