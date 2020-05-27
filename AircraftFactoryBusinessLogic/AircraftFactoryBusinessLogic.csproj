@@ -74,6 +74,7 @@
     <Compile Include="BindingModels\ChangeStatusBindingModel.cs" />
     <Compile Include="BindingModels\OrderBindingModel.cs" />
     <Compile Include="BindingModels\PartBindingModel.cs" />
+    <Compile Include="BindingModels\RefillStockBindingModel.cs" />
     <Compile Include="BusinessLogics\ReportLogic.cs" />
     <Compile Include="HelperModels\ExcelCellParameters.cs" />
     <Compile Include="HelperModels\ExcelInfo.cs" />

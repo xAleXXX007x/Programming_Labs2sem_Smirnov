@@ -177,6 +177,7 @@ namespace AircraftFactoryDatabaseImplement.Implements
                                 {
                                     part.Count += partModel.Count;
                                     context.SaveChanges();
+                                    transaction.Commit();
                                     return;
                                 }
                             }
