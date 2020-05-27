@@ -51,7 +51,7 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
                 Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
                 mainLogic.FinishOrder(new ChangeStatusBindingModel
                 {
-                    OrderId = order.Id
+                    OrderId = order.Id.Value
                 });
                 Thread.Sleep(implementer.PauseTime);
             }
@@ -63,13 +63,13 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
                     {
                         mainLogic.TakeOrderInWork(new ChangeStatusBindingModel
                         {
-                            OrderId = order.Id,
+                            OrderId = order.Id.Value,
                             ImplementerId = implementer.Id
                         });
                         Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
                         mainLogic.FinishOrder(new ChangeStatusBindingModel
                         {
-                            OrderId = order.Id
+                            OrderId = order.Id.Value
                         });
                         Thread.Sleep(implementer.PauseTime);
                     }

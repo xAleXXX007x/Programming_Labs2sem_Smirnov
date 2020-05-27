@@ -6,7 +6,7 @@ namespace AircraftFactoryBusinessLogic.BindingModels
 {
     public class AircraftPartBindingModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public int AircraftId { get; set; }
 

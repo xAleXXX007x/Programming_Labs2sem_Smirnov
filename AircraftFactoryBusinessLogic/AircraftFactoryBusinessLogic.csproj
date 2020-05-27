@@ -60,6 +60,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
     </Reference>
@@ -77,6 +78,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ColumnAttribute.cs" />
     <Compile Include="BindingModels\AircraftBindingModel.cs" />
     <Compile Include="BindingModels\AircraftPartBindingModel.cs" />
     <Compile Include="BindingModels\ClientBindingModel.cs" />
@@ -86,9 +88,11 @@
     <Compile Include="BindingModels\MessageInfoBindingModel.cs" />
     <Compile Include="BindingModels\OrderBindingModel.cs" />
     <Compile Include="BindingModels\PartBindingModel.cs" />
+    <Compile Include="BusinessLogics\BackUpAbstractLogic.cs" />
     <Compile Include="BusinessLogics\MailLogic.cs" />
     <Compile Include="BusinessLogics\ReportLogic.cs" />
     <Compile Include="BusinessLogics\WorkModeling.cs" />
+    <Compile Include="Enums\GridViewAutoSize.cs" />
     <Compile Include="HelperModels\ExcelCellParameters.cs" />
     <Compile Include="HelperModels\ExcelInfo.cs" />
     <Compile Include="HelperModels\ExcelMergeParameters.cs" />
@@ -107,6 +111,7 @@
     <Compile Include="Interfaces\IClientLogic.cs" />
     <Compile Include="Interfaces\IImplementerLogic.cs" />
     <Compile Include="Interfaces\IMessageInfoLogic.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="ViewModels\ImplementerViewModel.cs" />
     <Compile Include="ViewModels\MessageInfoViewModel.cs" />

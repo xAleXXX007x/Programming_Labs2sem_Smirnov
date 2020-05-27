@@ -34,13 +34,7 @@ namespace AircraftFactoryView
         {
             try
             {
-                var list = logic.GetList();
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(logic.GetList(), dataGridView);
             }
             catch (Exception ex)
             {

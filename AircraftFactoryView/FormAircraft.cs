@@ -63,15 +63,7 @@ namespace AircraftFactoryView
         {
             try
             {
-                if (aircraftParts != null)
-                {
-                    dataGridView.DataSource = null;
-                    dataGridView.DataSource = aircraftParts;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(aircraftParts, dataGridView);
             }
             catch (Exception ex)
             {

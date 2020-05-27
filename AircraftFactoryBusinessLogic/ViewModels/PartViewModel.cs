@@ -1,15 +1,24 @@
-﻿using System;
+﻿using AircraftFactoryBusinessLogic.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace AircraftFactoryBusinessLogic.ViewModels
 {
-    public class PartViewModel
+    [DataContract]
+    public class PartViewModel : BaseViewModel
     {
-        public int Id { get; set; }
-
+        [DataMember]
         [DisplayName("Название запчасти")]
+        [Column(title: "Название запчасти", width: 150)]
         public string PartName { get; set; }
+
+        public override List<string> Properties() => new List<string>
+        {
+            "Id",
+            "PartName"
+        };
     }
 }

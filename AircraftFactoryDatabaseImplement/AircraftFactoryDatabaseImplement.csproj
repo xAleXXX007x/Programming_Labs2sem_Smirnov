@@ -163,6 +163,7 @@
   <ItemGroup>
     <Compile Include="AircraftFactoryDatabase.cs" />
     <Compile Include="Implements\AircraftLogic.cs" />
+    <Compile Include="Implements\BackUpLogic.cs" />
     <Compile Include="Implements\ClientLogic.cs" />
     <Compile Include="Implements\ImplementerLogic.cs" />
     <Compile Include="Implements\MessageInfoLogic.cs" />
