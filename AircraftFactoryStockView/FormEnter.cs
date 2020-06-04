@@ -21,16 +21,15 @@ namespace AircraftFactoryStockView
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBoxEmail.Text) && !string.IsNullOrEmpty(textBoxPassword.Text))
+            if (!string.IsNullOrEmpty(textBoxPassword.Text))
             {
                 try
                 {
-                    string login = ConfigurationManager.AppSettings["Login"];
                     string password = ConfigurationManager.AppSettings["Password"];
 
-                    if (!textBoxEmail.Text.Equals(login) || !textBoxPassword.Text.Equals(password))
+                    if (!textBoxPassword.Text.Equals(password))
                     {
-                        throw new Exception("Неверный логин или пароль");
+                        throw new Exception("Неверный пароль");
                     }
 
                     Program.LoggedIn = true;

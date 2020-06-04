@@ -25,28 +25,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelEmail = new System.Windows.Forms.Label();
-            this.textBoxEmail = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            //
-            // labelEmail
-            //
-            this.labelEmail.AutoSize = true;
-            this.labelEmail.Location = new System.Drawing.Point(20, 21);
-            this.labelEmail.Name = "labelEmail";
-            this.labelEmail.Size = new System.Drawing.Size(41, 13);
-            this.labelEmail.TabIndex = 0;
-            this.labelEmail.Text = "Логин:";
-            //
-            // textBoxEmail
-            //
-            this.textBoxEmail.Location = new System.Drawing.Point(74, 18);
-            this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(200, 20);
-            this.textBoxEmail.TabIndex = 1;
             //
             // labelPassword
             //
@@ -79,15 +61,11 @@
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.labelPassword);
-            this.Controls.Add(this.textBoxEmail);
-            this.Controls.Add(this.labelEmail);
             this.Text = "Вход";
             this.ResumeLayout(false);
             this.PerformLayout();
         }
         #endregion
-        private System.Windows.Forms.Label labelEmail;
-        private System.Windows.Forms.TextBox textBoxEmail;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Button buttonLogin;
