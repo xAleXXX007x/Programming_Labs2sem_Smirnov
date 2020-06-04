@@ -48,12 +48,7 @@ namespace AircraftFactoryView
         {
             try
             {
-                dataGridView.DataSource = null;
-                dataGridView.DataSource = orderLogic.Read(null);
-                dataGridView.Columns[0].Visible = false;
-                dataGridView.Columns[1].Visible = false;
-                dataGridView.Columns[2].Visible = false;
-                dataGridView.Columns[3].Visible = false;
+                Program.ConfigGrid(orderLogic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {
