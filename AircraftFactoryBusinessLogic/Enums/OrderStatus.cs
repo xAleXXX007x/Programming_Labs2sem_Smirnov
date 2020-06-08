@@ -12,6 +12,8 @@ namespace AircraftFactoryBusinessLogic.Enums
 
         Готов = 2,
 
-        Оплачен = 3
+        Оплачен = 3,
+
+        ТребуютсяМатериалы = 4
     }
 }

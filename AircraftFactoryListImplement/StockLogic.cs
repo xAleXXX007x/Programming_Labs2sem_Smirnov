@@ -317,7 +317,7 @@ namespace AircraftFactoryListImplement
             });
         }
 
-        public void WithdrawStock(OrderViewModel order)
+        public bool WithdrawStock(OrderViewModel order)
         {
             var aircraftParts = new List<AircraftPart>();
 
@@ -348,7 +348,7 @@ namespace AircraftFactoryListImplement
 
                 if (count < part.Count * order.Count)
                 {
-                    throw new Exception("Недостаточно запчастей для выполнения заказа");
+                    return false;
                 }
                 else
                 {
@@ -416,6 +416,8 @@ namespace AircraftFactoryListImplement
                     StockParts = parts
                 });
             }
+
+            return true;
         }
     }
 

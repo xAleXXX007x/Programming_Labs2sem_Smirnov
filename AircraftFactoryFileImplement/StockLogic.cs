@@ -142,7 +142,7 @@ namespace AircraftFactoryFileImplement
             });
         }
 
-        public void WithdrawStock(OrderViewModel order)
+        public bool WithdrawStock(OrderViewModel order)
         {
             var aircraftParts = 
                 source.AircraftParts
@@ -162,7 +162,7 @@ namespace AircraftFactoryFileImplement
             {
                 if (aircraftParts[stockPart.PartId] > stockPart.Count)
                 {
-                    throw new Exception("Недостаточно запчастей для выполнения заказа");
+                    return false;
                 }
             }
 
@@ -186,6 +186,8 @@ namespace AircraftFactoryFileImplement
                     }
                 }
             }
+
+            return true;
         }
     }
 

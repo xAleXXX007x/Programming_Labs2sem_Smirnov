@@ -47,5 +47,8 @@ namespace AircraftFactoryBusinessLogic.BindingModels
 
         [DataMember]
         public bool? FreeOrders { get; set; }
+
+        [DataMember]
+        public bool? NotSuffMaterialOrders { get; set; }
     }
 }

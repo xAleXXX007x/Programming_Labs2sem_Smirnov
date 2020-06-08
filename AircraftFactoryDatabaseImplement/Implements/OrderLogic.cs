@@ -75,7 +75,8 @@ namespace AircraftFactoryDatabaseImplement.Implements
                                 (rec.ClientId == model.ClientId) ||
                                 (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue) ||
                                 (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && 
-                                rec.Status == OrderStatus.Выполняется))
+                                rec.Status == OrderStatus.Выполняется) || 
+                                model.NotSuffMaterialOrders.HasValue && model.NotSuffMaterialOrders.Value && rec.Status == OrderStatus.ТребуютсяМатериалы)
                         .Select(rec => CreateViewModel(rec)));
                 }
                 else

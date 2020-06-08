@@ -55,6 +55,47 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
                 });
                 Thread.Sleep(implementer.PauseTime);
             }
+
+            var notSuffMatsOrders = await Task.Run(() => orderLogic.Read(new OrderBindingModel { NotSuffMaterialOrders = true }));
+
+            await Task.Run(() =>
+            {
+                var toRemove = new List<OrderViewModel>();
+                foreach (var order in notSuffMatsOrders)
+                {
+                    try
+                    {
+                        foreach (var _order in orders)
+                        {
+                            if (_order.Id == order.Id)
+                            {
+                                toRemove.Add(_order);
+                            }
+                        }
+                        mainLogic.TakeOrderInWork(new ChangeStatusBindingModel
+                        {
+                            OrderId = order.Id,
+                            ImplementerId = implementer.Id
+                        });
+                        Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                        mainLogic.FinishOrder(new ChangeStatusBindingModel
+                        {
+                            OrderId = order.Id
+                        });
+                        Thread.Sleep(implementer.PauseTime);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                }
+
+                foreach (var order in toRemove)
+                {
+                    orders.Remove(order);
+                }
+            });
+
             await Task.Run(() =>
             {
                 foreach (var order in orders)

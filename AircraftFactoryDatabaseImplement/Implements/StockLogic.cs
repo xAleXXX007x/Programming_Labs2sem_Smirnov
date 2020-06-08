@@ -201,7 +201,7 @@ namespace AircraftFactoryDatabaseImplement.Implements
             }
         }
 
-        public void WithdrawStock(OrderViewModel order)
+        public bool WithdrawStock(OrderViewModel order)
         {
             using (var context = new AircraftFactoryDatabase())
             {
@@ -243,11 +243,13 @@ namespace AircraftFactoryDatabaseImplement.Implements
                             }
                         }
                         transaction.Commit();
+
+                        return true;
                     }
                     catch (Exception)
                     {
                         transaction.Rollback();
-                        throw;
+                        return false;
                     }
                 }
             }

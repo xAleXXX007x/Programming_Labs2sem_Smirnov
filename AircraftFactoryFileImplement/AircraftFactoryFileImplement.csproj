@@ -47,6 +47,8 @@
     <Compile Include="Client.cs" />
     <Compile Include="ClientLogic.cs" />
     <Compile Include="FileDataListSingleton.cs" />
+    <Compile Include="Implementer.cs" />
+    <Compile Include="ImplementerLogic.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderLogic.cs" />
     <Compile Include="Part.cs" />
@@ -60,6 +62,10 @@
     <ProjectReference Include="..\AircraftFactoryBusinessLogic\AircraftFactoryBusinessLogic.csproj">
       <Project>{47e25470-e53f-4395-8a22-42ea660a8386}</Project>
       <Name>AircraftFactoryBusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AircraftFactoryListImplement\AircraftFactoryListImplement.csproj">
+      <Project>{2BB8C3C8-B61B-4F01-8710-257169A73261}</Project>
+      <Name>AircraftFactoryListImplement</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

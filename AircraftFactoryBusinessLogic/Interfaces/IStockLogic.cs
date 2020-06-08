@@ -20,6 +20,6 @@ namespace AircraftFactoryBusinessLogic.Interfaces
 
         void RefillStock(StockBindingModel model, StockPartBindingModel partModel);
 
-        void WithdrawStock(OrderViewModel order);
+        bool WithdrawStock(OrderViewModel order);
     }
 }
