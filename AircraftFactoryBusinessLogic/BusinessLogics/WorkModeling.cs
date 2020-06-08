@@ -46,6 +46,7 @@ namespace AircraftFactoryBusinessLogic.BusinessLogics
             {
                 ImplementerId = implementer.Id
             }));
+
             foreach (var order in runOrders)
             {
                 Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
