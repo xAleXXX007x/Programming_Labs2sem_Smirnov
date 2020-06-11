@@ -15,6 +15,10 @@ namespace AircraftFactoryView
 {
     public partial class FormMail : Form
     {
+        int curPage = 0;
+        int perPage = 4;
+        bool blocked = false;
+
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
@@ -35,12 +39,15 @@ namespace AircraftFactoryView
         {
             try
             {
-                var list = logic.Read(null);
+                var list = logic.Read(null).Skip(curPage * perPage).Take(perPage).ToList();
+
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                 }
+
+                blocked = list.Count < perPage;
             }
             catch (Exception ex)
             {
@@ -50,6 +57,23 @@ namespace AircraftFactoryView
 
         private void buttonRef_Click(object sender, EventArgs e)
         {
+            LoadData();
+        }
+
+        private void buttonNext_Click(object sender, EventArgs e)
+        {
+            if (blocked)
+            {
+                return;
+            }
+
+            curPage++;
+            LoadData();
+        }
+
+        private void buttonPrev_Click(object sender, EventArgs e)
+        {
+            curPage = Math.Max(0, curPage - 1);
             LoadData();
         }
     }
