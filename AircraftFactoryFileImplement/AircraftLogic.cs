@@ -72,7 +72,7 @@ namespace AircraftFactoryFileImplement
             Aircraft element = source.Aircrafts.FirstOrDefault(rec => rec.AircraftName == model.AircraftName);
             if (element != null)
             {
-                throw new Exception("Уже есть изделие с таким названием");
+                throw new Exception("Уже есть самолёт с таким названием");
             }
             int maxId = source.Aircrafts.Count > 0 ? source.Aircrafts.Max(rec => rec.Id) : 0;
             source.Aircrafts.Add(new Aircraft

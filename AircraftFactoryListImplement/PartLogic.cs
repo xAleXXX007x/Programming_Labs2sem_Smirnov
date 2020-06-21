@@ -61,7 +61,7 @@ namespace AircraftFactoryListImplement
 
                 if (source.Parts[i].PartName == model.PartName)
                 {
-                    throw new Exception("Уже есть ингредиент с таким названием");
+                    throw new Exception("Уже есть запчасть с таким названием");
                 }
             }
             source.Parts.Add(new Part

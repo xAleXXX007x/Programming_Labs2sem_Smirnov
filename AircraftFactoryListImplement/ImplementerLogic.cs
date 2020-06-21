@@ -30,6 +30,11 @@ namespace AircraftFactoryListImplement
                 {
                     tempImplementer = implementer;
                 }
+
+                if (!model.Id.HasValue && model.ImplementerFIO == implementer.ImplementerFIO)
+                {
+                    throw new Exception("Данный исполнитель уже есть в системе");
+                }
             }
             if (model.Id.HasValue)
             {

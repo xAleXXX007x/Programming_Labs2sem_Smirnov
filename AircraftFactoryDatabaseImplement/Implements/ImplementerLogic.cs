@@ -34,6 +34,13 @@ namespace AircraftFactoryDatabaseImplement.Implements
                 }
                 else
                 {
+                    Implementer implementer = context.Implementers.FirstOrDefault(rec => rec.ImplementerFIO == model.ImplementerFIO);
+
+                    if (implementer != null)
+                    {
+                        throw new Exception("Данный исполнитель уже есть в системе");
+                    }
+
                     context.Implementers.Add(CreateModel(model, tempImplementer));
                 }
 

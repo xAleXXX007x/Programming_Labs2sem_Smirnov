@@ -34,6 +34,13 @@ namespace AircraftFactoryDatabaseImplement.Implements
                 }
                 else
                 {
+                    Client client = context.Clients.FirstOrDefault(rec => rec.Email == model.Email);
+
+                    if (client != null)
+                    {
+                        throw new Exception("Данный логин занят");
+                    }
+
                     context.Clients.Add(CreateModel(model, tempClient));
                 }
 

@@ -40,6 +40,13 @@ namespace AircraftFactoryFileImplement
             }
             else
             {
+                Implementer implementer = source.Implementers.FirstOrDefault(rec => rec.ImplementerFIO == model.ImplementerFIO);
+
+                if (implementer != null)
+                {
+                    throw new Exception("Данный исполнитель уже есть в системе");
+                }
+
                 source.Implementers.Add(CreateModel(model, tempImplementer));
             }
         }

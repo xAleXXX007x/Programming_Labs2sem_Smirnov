@@ -40,6 +40,13 @@ namespace AircraftFactoryFileImplement
             }
             else
             {
+                Client client = source.Clients.FirstOrDefault(rec => rec.Email == model.Email);
+
+                if (client != null)
+                {
+                    throw new Exception("Данный логин занят");
+                }
+
                 source.Clients.Add(CreateModel(model, tempClient));
             }
         }

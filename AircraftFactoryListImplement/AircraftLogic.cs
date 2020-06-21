@@ -122,7 +122,7 @@ namespace AircraftFactoryListImplement
 
                 if (source.Aircrafts[i].AircraftName == model.AircraftName)
                 {
-                    throw new Exception("Уже есть изделие с таким названием");
+                    throw new Exception("Уже есть самолёт с таким названием");
                 }
             }
 

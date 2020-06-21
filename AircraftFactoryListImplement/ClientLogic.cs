@@ -30,6 +30,11 @@ namespace AircraftFactoryListImplement
                 {
                     tempClient = client;
                 }
+
+                if (!model.Id.HasValue && model.Email == client.Email)
+                {
+                    throw new Exception("Данный логин уже занят");
+                }
             }
             if (model.Id.HasValue)
             {
