@@ -1,4 +1,5 @@
 ﻿using AircraftFactoryBusinessLogic.BindingModels;
+using AircraftFactoryBusinessLogic.Enums;
 using AircraftFactoryBusinessLogic.Interfaces;
 using AircraftFactoryBusinessLogic.ViewModels;
 using System;
@@ -67,7 +68,13 @@ namespace AircraftFactoryListImplement
             {
                 if (model != null)
                 {
-                    if (order.Id == model.Id)
+                    if ((model.Id.HasValue && order.Id == model.Id) ||
+                                (model.DateFrom.HasValue && model.DateTo.HasValue &&
+                                order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo) ||
+                                (order.ClientId == model.ClientId) ||
+                                (model.FreeOrders.HasValue && model.FreeOrders.Value && !order.ImplementerId.HasValue) ||
+                                (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId &&
+                                order.Status == OrderStatus.Выполняется))
                     {
                         result.Add(CreateViewModel(order));
                         break;
@@ -92,23 +99,36 @@ namespace AircraftFactoryListImplement
                 }
             }
 
-            Implementer implementer = null;
+            Client client = null;
 
-            foreach (Implementer a in source.Implementers)
+            foreach (Client c in source.Clients)
             {
-                if (a.Id == model.ImplementerId)
+                if (c.Id == model.ClientId)
                 {
-                    implementer = a;
+                    client = c;
                     break;
                 }
             }
 
-            if (aircraft == null || model.ImplementerId.HasValue && implementer == null)
+            Implementer implementer = null;
+
+            foreach (Implementer i in source.Implementers)
+            {
+                if (i.Id == model.ImplementerId)
+                {
+                    implementer = i;
+                    break;
+                }
+            }
+
+            if (aircraft == null || client == null || model.ImplementerId.HasValue && implementer == null)
             {
                 throw new Exception("Элемент не найден");
             }
 
             order.AircraftId = model.AircraftId;
+            order.ClientId = model.ClientId.Value;
+            order.ClientFIO = client.ClientFIO;
             order.ImplementerId = (int)model.ImplementerId;
             order.ImplementerFIO = implementer.ImplementerFIO;
             order.Count = model.Count;
@@ -133,18 +153,29 @@ namespace AircraftFactoryListImplement
                 }
             }
 
-            Implementer implementer = null;
+            Client client = null;
 
-            foreach (Implementer a in source.Implementers)
+            foreach (Client c in source.Clients)
             {
-                if (a.Id == order.ImplementerId)
+                if (c.Id == order.ClientId)
                 {
-                    implementer = a;
+                    client = c;
                     break;
                 }
             }
 
-            if (aircraft == null || order.ImplementerId.HasValue && implementer == null)
+            Implementer implementer = null;
+
+            foreach (Implementer i in source.Implementers)
+            {
+                if (i.Id == order.ImplementerId)
+                {
+                    implementer = i;
+                    break;
+                }
+            }
+
+            if (aircraft == null || client == null || order.ImplementerId.HasValue && implementer == null)
             {
                 throw new Exception("Элемент не найден");
             }
@@ -154,6 +185,8 @@ namespace AircraftFactoryListImplement
                 Id = order.Id,
                 AircraftId = order.AircraftId,
                 AircraftName = aircraft.AircraftName,
+                ClientId = order.ClientId,
+                ClientFIO = client.ClientFIO,
                 ImplementerId = order.ImplementerId,
                 ImplementerFIO = implementer.ImplementerFIO,
                 Count = order.Count,

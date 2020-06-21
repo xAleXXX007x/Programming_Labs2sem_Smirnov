@@ -1,4 +1,5 @@
 ﻿using AircraftFactoryBusinessLogic.BindingModels;
+using AircraftFactoryBusinessLogic.Enums;
 using AircraftFactoryBusinessLogic.Interfaces;
 using AircraftFactoryBusinessLogic.ViewModels;
 using System;
@@ -63,7 +64,15 @@ namespace AircraftFactoryFileImplement
 
             if (model != null)
             {
-                result.Add(CreateViewModel(source.Orders.FirstOrDefault(rec => rec.Id == model.Id)));
+                result.AddRange(source.Orders
+                        .Where(rec => (model.Id.HasValue && rec.Id == model.Id) ||
+                                (model.DateFrom.HasValue && model.DateTo.HasValue &&
+                                rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+                                (rec.ClientId == model.ClientId) ||
+                                (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue) ||
+                                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && 
+                                rec.Status == OrderStatus.Выполняется))
+                        .Select(rec => CreateViewModel(rec)));
             } else
             {
                 result.AddRange(source.Orders.Select(rec => CreateViewModel(rec)));
@@ -74,14 +83,17 @@ namespace AircraftFactoryFileImplement
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             Aircraft aircraft = source.Aircrafts.Where(rec => rec.Id == model.AircraftId).FirstOrDefault();
+            Client client = source.Clients.Where(rec => rec.Id == order.ClientId).FirstOrDefault();
             Implementer implementer = source.Implementers.Where(rec => rec.Id == model.AircraftId).FirstOrDefault();
 
-            if (aircraft == null || order.ImplementerId.HasValue && implementer == null)
+            if (aircraft == null || client == null || order.ImplementerId.HasValue && implementer == null)
             {
                 throw new Exception("Элемент не найден");
             }
 
             order.AircraftId = model.AircraftId;
+            order.ClientId = model.ClientId.Value;
+            order.ClientFIO = client.ClientFIO;
             order.ImplementerId = model.ImplementerId;
             order.ImplementerFIO = implementer.ImplementerFIO;
             order.Count = model.Count;
@@ -96,9 +108,10 @@ namespace AircraftFactoryFileImplement
         private OrderViewModel CreateViewModel(Order order)
         {
             Aircraft aircraft = source.Aircrafts.Where(rec => rec.Id == order.AircraftId).FirstOrDefault();
+            Client client = source.Clients.Where(rec => rec.Id == order.ClientId).FirstOrDefault();
             Implementer implementer = source.Implementers.Where(rec => rec.Id == order.AircraftId).FirstOrDefault();
 
-            if (aircraft == null || order.ImplementerId.HasValue && implementer == null)
+            if (aircraft == null || client == null || order.ImplementerId.HasValue && implementer == null)
             {
                 throw new Exception("Элемент не найден");
             }
@@ -108,6 +121,8 @@ namespace AircraftFactoryFileImplement
                 Id = order.Id,
                 AircraftId = order.AircraftId,
                 AircraftName = aircraft.AircraftName,
+                ClientId  = order.ClientId,
+                ClientFIO = client.ClientFIO,
                 ImplementerId = order.ImplementerId,
                 ImplementerFIO = implementer.ImplementerFIO,
                 Count = order.Count,

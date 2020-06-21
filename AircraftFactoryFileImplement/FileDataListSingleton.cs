@@ -101,6 +101,8 @@ namespace AircraftFactoryFileImplement
                     list.Add(new Order
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientId = Convert.ToInt32(elem.Attribute("ClientId").Value),
+                        ImplementerId = Convert.ToInt32(elem.Attribute("ImplementerId").Value),
                         AircraftId = Convert.ToInt32(elem.Element("AircraftId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
@@ -243,6 +245,8 @@ namespace AircraftFactoryFileImplement
                     xElement.Add(new XElement("Order",
                     new XAttribute("Id", order.Id),
                     new XElement("AircraftId", order.AircraftId),
+                    new XElement("ClientId", order.ClientId),
+                    new XElement("ImplementerId", order.ImplementerId),
                     new XElement("Count", order.Count),
                     new XElement("Sum", order.Sum),
                     new XElement("Status", order.Status),
