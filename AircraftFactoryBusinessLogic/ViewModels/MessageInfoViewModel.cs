@@ -38,6 +38,7 @@ namespace AircraftFactoryBusinessLogic.ViewModels
 
         public override List<string> Properties() => new List<string>
         {
+            "Id",
             "SenderName",
             "DateDelivery",
             "Subject",
