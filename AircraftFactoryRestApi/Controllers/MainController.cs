@@ -56,7 +56,7 @@ namespace AircraftFactoryRestApi.Controllers
             if (model == null) return null;
             return new AircraftModel
             {
-                Id = model.Id,
+                Id = model.Id.Value,
                 AircraftName = model.AircraftName,
                 Price = model.Price
             };

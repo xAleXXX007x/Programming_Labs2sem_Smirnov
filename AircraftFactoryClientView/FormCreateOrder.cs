@@ -75,7 +75,7 @@ namespace AircraftFactoryClientView
             {
                 APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
                 {
-                    ClientId = Program.Client.Id,
+                    ClientId = Program.Client.Id.Value,
                     AircraftId = Convert.ToInt32(comboBoxAircraft.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)

@@ -33,12 +33,11 @@ namespace AircraftFactoryBusinessLogic.ViewModels
 
         [DataMember]
         [DisplayName("Текст")]
-        [Column(title: "Текст", gridViewAutoSize: GridViewAutoSize.Fill)]
+        [Column(title: "Текст", width: 150)]
         public string Body { get; set; }
 
         public override List<string> Properties() => new List<string>
         {
-            "MessageId",
             "SenderName",
             "DateDelivery",
             "Subject",

@@ -13,7 +13,7 @@ namespace AircraftFactoryBusinessLogic.ViewModels
     {
         [DataMember]
         [DisplayName("Клиент")]
-        [Column(title: "Клиент", gridViewAutoSize: GridViewAutoSize.Fill)]
+        [Column(title: "Клиент", width: 150)]
         public string ClientFIO { get; set; }
 
         [DataMember]
