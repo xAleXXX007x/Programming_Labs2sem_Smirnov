@@ -19,5 +19,8 @@ namespace AircraftFactoryDatabaseImplement.Models
 
         [ForeignKey("ClientId")]
         public virtual List<MessageInfo> MessageInfoes { get; set; }
+
+        [ForeignKey("ClientId")]
+        public virtual List<Order> Orders { get; set; }
     }
 }
