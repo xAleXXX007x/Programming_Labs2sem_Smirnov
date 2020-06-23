@@ -27,7 +27,7 @@ namespace AircraftFactoryClientView
         {
             try
             {
-                var list = (APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}")).Skip(curPage * perPage).Take(perPage).ToList();
+                var list = (APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessagespage?clientId={Program.Client.Id}&skip={curPage * perPage}&take={perPage}"));
 
                 if (list != null)
                 {
