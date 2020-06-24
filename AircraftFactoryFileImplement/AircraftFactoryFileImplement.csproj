@@ -49,6 +49,8 @@
     <Compile Include="FileDataListSingleton.cs" />
     <Compile Include="Implementer.cs" />
     <Compile Include="ImplementerLogic.cs" />
+    <Compile Include="MessageInfo.cs" />
+    <Compile Include="MessageInfoLogic.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderLogic.cs" />
     <Compile Include="Part.cs" />

@@ -32,7 +32,7 @@ namespace AircraftFactoryRestApi.Controllers
         public List<MessageInfoViewModel> GetMessages(int clientId) => _messageLogic.Read(new MessageInfoBindingModel { ClientId = clientId });
 
         [HttpGet]
-        public List<MessageInfoViewModel> GetMessagesPage(int clientId, int skip, int take) => _messageLogic.Read(new MessageInfoBindingModel { ClientId = clientId }).Skip(skip).Take(take).ToList();
+        public List<MessageInfoViewModel> GetMessagesPage(int clientId, int skip, int take) => _messageLogic.Read(new MessageInfoBindingModel { ClientId = clientId, Skip = skip, Take = take });
 
         [HttpPost]
         public void Register(ClientBindingModel model)

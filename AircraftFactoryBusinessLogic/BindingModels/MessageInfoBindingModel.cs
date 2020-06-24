@@ -22,5 +22,9 @@ namespace AircraftFactoryBusinessLogic.BindingModels
         public string Body { get; set; }
         [DataMember]
         public DateTime DateDelivery { get; set; }
+
+        public int Skip { get; set; }
+
+        public int Take { get; set; }
     }
 }

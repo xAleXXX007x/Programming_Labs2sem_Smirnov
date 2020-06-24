@@ -38,7 +38,10 @@ namespace AircraftFactoryFileImplement
 
         public List<MessageInfoViewModel> Read(MessageInfoBindingModel model)
         {
-            List<MessageInfoViewModel> result = source.Aircrafts
+            List<MessageInfoViewModel> result = source.MessageInfoes
+            .Where(rec => model == null || rec.ClientId == model.ClientId)
+            .Skip(model.Skip)
+            .Take(model.Take)
             .Select(rec => new MessageInfoViewModel
             {
                 MessageId = model.MessageId,

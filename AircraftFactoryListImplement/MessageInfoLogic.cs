@@ -41,22 +41,19 @@ namespace AircraftFactoryListImplement
 
         public List<MessageInfoViewModel> Read(MessageInfoBindingModel model)
         {
-            List<MessageInfoViewModel> result = new List<MessageInfoViewModel>();
-
-            foreach (var message in source.MessageInfoes)
+            List<MessageInfoViewModel> result = source.MessageInfoes
+            .Where(rec => model == null || rec.ClientId == model.ClientId)
+            .Skip(model.Skip)
+            .Take(model.Take)
+            .Select(rec => new MessageInfoViewModel
             {
-                if (message.MessageId.Equals(model.MessageId))
-                {
-                    result.Add(new MessageInfoViewModel
-                    {
-                        MessageId = message.MessageId,
-                        SenderName = message.SenderName,
-                        DateDelivery = message.DateDelivery,
-                        Subject = message.Subject,
-                        Body = message.Body
-                    });
-                }
-            }
+                MessageId = model.MessageId,
+                SenderName = model.FromMailAddress,
+                DateDelivery = model.DateDelivery,
+                Subject = model.Subject,
+                Body = model.Body
+            })
+            .ToList();
 
             return result;
         }
